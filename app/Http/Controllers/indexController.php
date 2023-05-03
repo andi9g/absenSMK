@@ -33,10 +33,9 @@ class indexController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function root()
-    {
-        return redirect('login');
-    }
+
+
+
 
     public function index(Request $request)
     {
@@ -114,7 +113,7 @@ class indexController extends Controller
                     ->where('idruangan', $idruangan)->where('tanggalmulai', $tanggal_sekarang)
                     ->count();
 
-                    $jam_masuk = strtotime($dt->jam_masuk); 
+                    $jam_masuk = strtotime($dt->jam_masuk);
                     $jam_keluar = strtotime($dt->jam_keluar);
                     $jam_sekarang = strtotime(date('H:i'));
 
@@ -124,10 +123,10 @@ class indexController extends Controller
                             $idkelas_mhs[] = $dt->idkelas_mhs;
                         }
                     }
-                    
+
                 }
 
-                
+
 
             }
 
@@ -142,10 +141,10 @@ class indexController extends Controller
                 ->where('pindahjadwal.idruangan', $idruangan)
                 ->select('kelas_mhs.*', 'matkul.*', 'pindahjadwal.*','kelas.nama_kelas')
                 ->get();
-            
-            
+
+
             foreach ($pindahjadwalCek as $dt) {
-                $jam_masuk = strtotime($dt->jam_masuk); 
+                $jam_masuk = strtotime($dt->jam_masuk);
                 $jam_keluar = strtotime($dt->jam_keluar);
                 $jam_sekarang = strtotime(date('H:i'));
 
@@ -182,8 +181,8 @@ class indexController extends Controller
             $request->validate([
                 'keterlambatan' => 'required',
             ]);
-            
-            
+
+
             try{
                 $request->session()->put('keterlambatan', $request->keterlambatan);
                 return redirect('menuabsen')->with('toast_success', 'success');
@@ -193,16 +192,16 @@ class indexController extends Controller
         }else {
             return redirect('/');
         }
-        
+
     }
-    
+
 
 
     public function proses(Request $request)
     {
 
         $jam_sekarang = strtotime(date('H:i'));
-        
+
         $computerId = str_replace("/","", $_SERVER['HTTP_USER_AGENT']);
         $computerId = str_replace(" ","", $computerId);
         $computerId = str_replace("$","", $computerId);
@@ -218,7 +217,7 @@ class indexController extends Controller
         ->select('ruangan.nama_ruangan', 'ruangan_master.idruangan_master','ruangan.idruangan')
         ->where('computerId', $computerId);
 
-        
+
         $total = $open->count();
         $ambil = $open->first();
         $idruangan = empty($ambil->idruangan)?0:$ambil->idruangan;
@@ -245,11 +244,11 @@ class indexController extends Controller
             ->join('kelas', 'kelas.idkelas','=','mahasiswa.idkelas')
             ->where('card.uid', $uid)
             ->select('card.nim','mahasiswa.nama_mhs','prodi.id_prodi','kelas.idkelas', 'card.ket');
-            
+
             $ambil_master = empty(cardM::where('uid', $uid)->first()->ket)?'none':cardM::where('uid', $uid)->first()->ket;
 
             if ($ambil_master === "master") {
-                
+
                 if($request->session()->get('open')===true){
                     // $request->session()->flush();
                     return redirect('menuabsen');
@@ -261,7 +260,7 @@ class indexController extends Controller
                     }
                     return redirect('menuabsen');
                 }
-                
+
 
             }else if($ambil_master === "mahasiswa") {
                 $request->session()->forget('open');
@@ -277,7 +276,7 @@ class indexController extends Controller
                 $keterlambatan = $request->session()->get('keterlambatan');
                 // dd($keterlambatan);
                 $keterlambatan_jam = strtotime("+".$keterlambatan." minutes", strtotime($request->session()->get('keterlambatan_jam')));
-                
+
                 if($jam_sekarang > $keterlambatan_jam && $keterlambatan != 0) {
                     return redirect()->back()->with('warning',"Maaf, anda terlambat!");
                 }
@@ -289,7 +288,7 @@ class indexController extends Controller
             $data_nim = $ambil_nim->first()->nim;
             $data_prodi = $ambil_nim->first()->id_prodi;
             $data_idkelas = $ambil_nim->first()->id_idkelas;
-            
+
             $telah_melakukan_absen = false;
             $absenPindah = false;
 
@@ -301,7 +300,7 @@ class indexController extends Controller
                     $kelas[] = $kls->idkelas;
                 }
             }
-            
+
 
             foreach ($kelas as $kls) {
                 $idsmt = penyelenggaraM::where('idkelas', $kls)->first()->idsmt;
@@ -351,7 +350,7 @@ class indexController extends Controller
                         $idhari = hariM::where('nama_hari_en', $hariCek)->first()->idhari;
                         $nama_matkul_ = $dt->nmatkul;
 
-                        $jam_mulai = strtotime($dt->jam_masuk); 
+                        $jam_mulai = strtotime($dt->jam_masuk);
                         $jam_selesai = strtotime($dt->jam_keluar);
 
                         //masing-masing kelas mahasiswa di ambil dan di cek jam masuk dan keluar
@@ -376,7 +375,7 @@ class indexController extends Controller
                             ->where('kelas_mhs.idkelas', $kls)
                             ->where('kelas_mhs.idruangan', $idruangan)
                             ->where('kelas_mhs_peserta.nim', $data_nim);
-                            
+
                             // dd($kmatkul." - " . $tahun." - ". $idsmt." - ".$harilama." - ". $kls. " - ". $idruangan. " - ". $data_nim);
                             if($cekNim->count() == 1) {
                                 $idkelas_mhs = $cekNim->first()->idkelas_mhs;
@@ -390,13 +389,13 @@ class indexController extends Controller
                                     $tambah->idkelas_mhs = $idkelas_mhs;
                                     $tambah->id_peserta = $id_peserta;
                                     $tambah->save();
-                                    $tidak_ada_jadwal = true;                  
+                                    $tidak_ada_jadwal = true;
                                 }
 
                                 $ambilAbsen = absen::where('idkelas_mhs', $idkelas_mhs)->where('id_peserta', $id_peserta)->first();
                                 $id_absen = $ambilAbsen->id_absen;
 
-                                
+
                                 $cekAbsen2 = absenDetailM::join('absen', 'absen.id_absen', '=', 'absendetail.idabsen')
                                 ->join('kelas_mhs', 'kelas_mhs.idkelas_mhs', '=','absen.idkelas_mhs')
                                 ->join('pindahjadwal', 'pindahjadwal.idkelas_mhs','=', 'absen.idkelas_mhs')
@@ -407,7 +406,7 @@ class indexController extends Controller
                                 ->orderBy('absendetail.created_at', 'desc')
                                 ->select('absendetail.*', 'pindahjadwal.tanggalubah');
 
-                                
+
                                 // dd($cekAbsen2->count());
                                 $tambahPindah = false;
                                 if($cekAbsen2->count() == 0) {
@@ -446,10 +445,10 @@ class indexController extends Controller
                                             $tambahPindah->save();
                                         }
 
-                                        
+
                                     }
                                 }
-                                
+
                                 if($tambahPindah){
                                     $absenPindah = true;
                                 }
@@ -458,7 +457,7 @@ class indexController extends Controller
                             }else {
                                 // $tidak_ada_jadwal = true;
                             }
-                            
+
                             // dd($cekNim->kd_matkul);
 
                         }
@@ -467,13 +466,13 @@ class indexController extends Controller
 
 
 
-                if(count($cek) > 0 && $bukajadwal == false) {    
+                if(count($cek) > 0 && $bukajadwal == false) {
                     foreach ($cek as $dt) {
                         $hariCek = $dt->nama_hari_en;
                         $idhari = $dt->idhari;
                         $nama_matkul_ = $dt->nmatkul;
 
-                        $jam_mulai = strtotime($dt->jam_masuk); 
+                        $jam_mulai = strtotime($dt->jam_masuk);
                         $jam_selesai = strtotime($dt->jam_keluar);
 
                         //masing-masing kelas mahasiswa di ambil dan di cek jam masuk dan keluar
@@ -496,8 +495,8 @@ class indexController extends Controller
                             ->where('kelas_mhs.idkelas', $kls)
                             ->where('kelas_mhs.idruangan', $idruangan)
                             ->where('kelas_mhs_peserta.nim', $data_nim);
-                            
-                            
+
+
                             if($cekNim->count() == 1) {
                                 $idkelas_mhs = $cekNim->first()->idkelas_mhs;
                                 $id_peserta = $cekNim->first()->id_peserta;
@@ -509,7 +508,7 @@ class indexController extends Controller
                                     $tambah->idkelas_mhs = $idkelas_mhs;
                                     $tambah->id_peserta = $id_peserta;
                                     $tambah->save();
-                                    $tidak_ada_jadwal = true;                  
+                                    $tidak_ada_jadwal = true;
                                 }
 
                                 $ambilAbsen = absen::where('idkelas_mhs', $idkelas_mhs)->where('id_peserta', $id_peserta)->first();
@@ -518,7 +517,7 @@ class indexController extends Controller
                                 $cekAbsen2 = absenDetailM::where('idabsen', $id_absen)
                                 ->orderBy('created_at', 'desc')
                                 ->where('created_at', 'like', date('Y-m-d')."%");
-                                
+
                                 $tambahAbsen = false;
                                 // dd($cekAbsen2->count());
                                 if($cekAbsen2->count() == 0) {
@@ -533,7 +532,7 @@ class indexController extends Controller
                                 }else if($cekAbsen2->count() > 0) {
                                     $tanggalAbsen = strtotime(date('Y-m-d',strtotime($cekAbsen2->first()->updated_at)));
                                     $tanggalSekarang = strtotime(date('Y-m-d'));
-                                    
+
                                     if($tanggalAbsen == $tanggalSekarang) {
                                         // return redirect()->back()->with('warning', '<h4>Anda telah melakukan absensi<br>untuk matakuliah '.$kmatkul.'-'.$nama_matkul_.'</h4>')->withInput();
                                         $telah_melakukan_absen = true;
@@ -559,11 +558,11 @@ class indexController extends Controller
                             }else {
                                 $tidak_ada_jadwal = true;
                             }
-                            
+
                             // dd($cekNim->kd_matkul);
 
                         }
-                        
+
                     }
                     $tidak_ada_jadwal2 = false;
                 }else {
@@ -580,25 +579,25 @@ class indexController extends Controller
             if ($telah_melakukan_absen == true) {
                 return redirect()->back()->with('warning', 'Anda telah melkukan absen')->withInput();
             }
-            
+
 
             if ($tidak_ada_jadwal2) {
                 return redirect()->back()->with('warning', 'Tidak ada jadwal yang ditemukan')->withInput();
             }
 
-            
+
 
             if($tidak_ada_jadwal === true){
                 return redirect()->back()->with('warning', 'Tidak ada matakuliah yang dikontrak')->withInput();
             }
             return redirect()->back()->with('warning', 'Tidak ada jadwal yang ditemukan')->withInput();
 
-        
+
         }else {
             return redirect()->back()->with('warning','terjadi kesalahan')->withInput();
         }
 
-        
+
     }
 
     public function updateAbsen(Request $request, $idkelas_mhs, $id_peserta)
@@ -607,8 +606,8 @@ class indexController extends Controller
         $request->validate([
             'kehadiran' => 'required',
         ]);
-        
-        
+
+
         // try{
             if($request->session()->get('open')===true){
                 $kehadiran = $request->kehadiran;
@@ -636,7 +635,7 @@ class indexController extends Controller
                     $ambil = $cekAbsen->first();
                     $update = absenDetailM::where('idabsen', $idabsen)
                     ->where('created_at', $ambil->created_at)->update([
-                        'idkehadiran' => $kehadiran, 
+                        'idkehadiran' => $kehadiran,
                     ]);
 
                     if($update) {
@@ -645,7 +644,7 @@ class indexController extends Controller
                 }else if($cekAbsen->count() == 0) {
                     $pindahjadwal = pindahjadwalM::where('idkelas_mhs', $idkelas_mhs)
                     ->where('tanggalubah', date('Y-m-d'));
-                    
+
                     if($pindahjadwal->count() > 0) {
                         if($pindahjadwal->count() > 1) {
                             foreach ($pindahjadwal->get() as $item) {
@@ -658,9 +657,9 @@ class indexController extends Controller
                                 $tambah->updated_at = date('Y-m-d H:i:s');
                                 $tambah->save();
                             }
-                            
+
                         }else {
-                            
+
                             $tambah = new absenDetailM;
                             $tambah->idabsen = $idabsen;
                             $tambah->idhari = hariM::where('nama_hari_en', date('l', strtotime($pindahjadwal->first()->tanggalmulai)))->first()->idhari;
@@ -670,7 +669,7 @@ class indexController extends Controller
                             $tambah->updated_at = date('Y-m-d H:i:s');
                             $tambah->save();
                         }
-                        
+
                     }else {
                         $tambah = new absenDetailM;
                         $tambah->idabsen = $idabsen;
@@ -692,7 +691,7 @@ class indexController extends Controller
                 return redirect()->back()->with('warning','Terjadi kesalahan')->withInput();
             }
 
-            
+
         // }catch(\Throwable $th){
         //     return redirect()->back()->with('toast_error', 'Terjadi kesalahan');
         // }
@@ -715,7 +714,7 @@ class indexController extends Controller
     }
 
 
-   
+
 
 
     public function welcome()
@@ -786,8 +785,8 @@ class indexController extends Controller
                 $kd_matkul = $ex[1];
                 $nama_matkul = $ex[2];
                 $sks = $ex[3];
-                
-                
+
+
                 $pcreate_data=array('id'=>$id,
                 'kd_matkul'=>$kd_matkul,
                 'nama_matkul'=>$nama_matkul,
@@ -797,14 +796,14 @@ class indexController extends Controller
                 // // dd($value[0]);
                 DB::table('matkul')->insert($pcreate_data);
 
-                
+
 
                 if($i == 68){
                     return redirect('/matkul')->with('success', 'Import berhasil');
                 }
                 $i++;
             }
-            
+
 
 
         } catch (\Throwable $th) {
@@ -819,12 +818,12 @@ class indexController extends Controller
     //jadwal
     public function jadwal(Request $request)
     {
-        $ruangan = empty($request->ruangan)?"":$request->ruangan; 
-        $hari = empty($request->hari)?"":$request->hari; 
-        $kelas = empty($request->kelas)?"":$request->kelas; 
-        $tahun = empty($request->tahun)?date('Y'):$request->tahun; 
-        $semester = empty($request->semester)?"":$request->semester; 
-        $keyword = empty($request->keyword)?"":$request->keyword; 
+        $ruangan = empty($request->ruangan)?"":$request->ruangan;
+        $hari = empty($request->hari)?"":$request->hari;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+        $tahun = empty($request->tahun)?date('Y'):$request->tahun;
+        $semester = empty($request->semester)?"":$request->semester;
+        $keyword = empty($request->keyword)?"":$request->keyword;
 
         $kelas_ = kelasM::select('idkelas',"nama_kelas")->orderBy('idkelas', 'asc')->get();
         $prodi_ = prodiM::orderBy('id_prodi', 'asc')->get();
@@ -874,12 +873,12 @@ class indexController extends Controller
 
     public function laporan(Request $request)
     {
-        $ruangan = empty($request->ruangan)?"":$request->ruangan; 
-        $hari = empty($request->hari)?"":$request->hari; 
-        $kelas = empty($request->kelas)?"":$request->kelas; 
-        $tahun = empty($request->tahun)?date('Y'):$request->tahun; 
-        $semester = empty($request->semester)?"":$request->semester; 
-        $keyword = empty($request->keyword)?"":$request->keyword; 
+        $ruangan = empty($request->ruangan)?"":$request->ruangan;
+        $hari = empty($request->hari)?"":$request->hari;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+        $tahun = empty($request->tahun)?date('Y'):$request->tahun;
+        $semester = empty($request->semester)?"":$request->semester;
+        $keyword = empty($request->keyword)?"":$request->keyword;
 
         $kelas_ = kelasM::select('idkelas',"nama_kelas")->orderBy('idkelas', 'asc')->get();
         $prodi_ = prodiM::orderBy('id_prodi', 'asc')->get();
@@ -939,12 +938,12 @@ class indexController extends Controller
 
     public function tampil($ruangan,$hari,$kelas)
     {
-        
+
     }
 
     public function ubah_matkul($id, $kd_matkul, $ruangan, $hari, $kelas)
     {
-        
+
         return view('pages.pagesUbahJadwal',[
             'id' => $id,
             'kd_matkul' => $kd_matkul,
@@ -987,7 +986,7 @@ class indexController extends Controller
 
     public function admin(Request $request)
     {
-        
+
         // dd((int) filter_var("andi1092", FILTER_SANITIZE_NUMBER_INT));
         $post = empty($request->keyword)?"":$request->keyword;
         $data = adminM::where('nama', 'like', "$post%")->get();
@@ -1000,10 +999,10 @@ class indexController extends Controller
 
     public function siswa(Request $request)
     {
-        $jurusan = empty($request->jurusan)?"":$request->jurusan; 
-        $kelas = empty($request->kelas)?"":$request->kelas; 
-        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk; 
-        $keyword = empty($request->keyword)?"":$request->keyword; 
+        $jurusan = empty($request->jurusan)?"":$request->jurusan;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk;
+        $keyword = empty($request->keyword)?"":$request->keyword;
 
         $kelas_ = kelasM::select('idkelas',"namakelas")->orderBy('idkelas', 'asc')->get();
         $kelas_ = jurusanM::select('idjurusan',"namajurusan")->orderBy('idjurusan', 'asc')->get();
@@ -1019,7 +1018,7 @@ class indexController extends Controller
         ->paginate(15);
 
         $tampil->appends($request->only('keyword', 'tahun', 'jurusan', 'kelas', 'limit'));
-        
+
         return view('pages.pagesMahasiswa',[
             'Dtahun' => $tahun_,
             'tahun' => $tahun,
@@ -1034,7 +1033,7 @@ class indexController extends Controller
     }
 
     public function penyelenggara(Request $request){
-        
+
         $semester = semesterM::get();
 
         $tampil = penyelenggaraM::join('kelas', 'kelas.idkelas','=','penyelenggara_smt.idkelas')
@@ -1097,7 +1096,7 @@ class indexController extends Controller
         }
 
     }
-    
+
 
 
 
@@ -1152,7 +1151,7 @@ class indexController extends Controller
             }
         };
         // } catch (\Throwable $th) {
-            
+
         // }
     }
 

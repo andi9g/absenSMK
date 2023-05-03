@@ -25,7 +25,7 @@
     <table style="border-bottom: 2px solid;line-height: 0px;padding-bottom: 5px" width="100%">
         <tr>
             <td valign="center" width="60px">
-                <img src="{{ url('resource_admin/gambar/smk.png', []) }}" width="55px" alt="">
+                <img src="{{ url('resource_admin/gambar/smk.png', []) }}" width="150px" alt="">
             </td>
             <td style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;padding-top:10px">
                 <h1>LAPORAN ABSENSI SISWA</h1>
@@ -38,11 +38,11 @@
     @php
 
         if ($tanggal1 != $tanggal2) {
-            echo "(".\Carbon\Carbon::parse($tanggal1)->isoFormat('DD/MM/Y').")";
+            echo "(".\Carbon\Carbon::parse($tanggal1)->isoFormat('DD MMMM Y').")";
             echo '  <b>s/d</b>  ';
-            echo "(".\Carbon\Carbon::parse($tanggal2)->isoFormat('DD/MM/Y').")";
+            echo "(".\Carbon\Carbon::parse($tanggal2)->isoFormat('DD MMMM Y').")";
         }else {
-            echo "(".\Carbon\Carbon::parse($tanggal1)->isoFormat('DD/MM/Y').")";
+            echo "(".\Carbon\Carbon::parse($tanggal1)->isoFormat('DD MMMM Y').")";
         }
     @endphp
     </div>
@@ -92,7 +92,7 @@
             @foreach ($k['siswa'] as $s)
                 <tr>
                     <td align="center">{{$i3++}}</td>
-                    <td nowrap>{{ucwords($s["namasiswa"])}}</td>
+                    <td nowrap style="white-space: nowrap;">{{ucwords($s["namasiswa"])}}</td>
                     <td align="center">{{$s["jk"]}}</td>
 
                     @php

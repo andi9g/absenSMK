@@ -13,7 +13,7 @@
   @yield('atas')
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   @stack('start')
-  
+
 
 </head>
 <body class="sidebar-mini sidebar-closed text-sm loaded" id="badan">
@@ -38,7 +38,7 @@
           <div class="">
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-                
+
                 <div class="post">
                   <form class="form-horizontal" action="{{ route('ubah.password', []) }}" method="post">
                       @csrf
@@ -61,12 +61,12 @@
                           </div>
                         </div>
                   </form>
-  
+
                   <script>
                       function cek(){
                           var pass1 = document.getElementById('inputPassword1').value;
                           var pass2 = document.getElementById('inputPassword2').value;
-  
+
                           if(pass1.length >=5 ){
                                   document.getElementById('inputPassword1').className="form-control";
                               if(pass1 == pass2){
@@ -74,7 +74,7 @@
                                   document.getElementById('inputPassword2').className="form-control is-valid";
                               }else if(pass2.length == 0){
                                   document.getElementById('inputPassword2').className="form-control";
-  
+
                               }else {
                                    document.getElementById('inputPassword2').className="form-control is-invalid";
                               }
@@ -82,17 +82,17 @@
                                   document.getElementById('inputPassword1').className="form-control";
                           }else {
                               document.getElementById('inputPassword1').className="form-control is-invalid";
-  
+
                           }
-                         
-  
+
+
                       }
                   </script>
-                 
+
                 </div>
                 <!-- /.post -->
               </div>
-              
+
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
@@ -114,13 +114,13 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
+
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
-      
+
       <li class="nav-item">
         <a class="nav-link" href="{{ url('logout', []) }}" role="button">
           <i class="fa fa-power-off"></i>
@@ -157,7 +157,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column nav-flat nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        
+
           {{-- <li class="nav-item hoverku">
             <a href="{{ url('/welcome', []) }}" class="nav-link @yield('activekuHome')">
               <i class="nav-icon fa fa-dashboard"></i>
@@ -207,11 +207,11 @@
           </li>
 
 
-          
-              
-          
 
-          
+
+
+
+
 
           @if (Session::get('posisi')=='superadmin')
           <li class="nav-item hoverku">
@@ -225,7 +225,7 @@
           </li>
 
           <li class="nav-item hoverku">
-            
+
             <a href="{{ url('/admin', []) }}" class="nav-link @yield('activekuAdmin')">
               <i class="nav-icon fa fa-user"></i>
               <p>
@@ -242,7 +242,7 @@
               </p>
             </a>
           </li>
-              
+
           @endif
 
           <li class="nav-item hoverku">
@@ -254,11 +254,19 @@
               </p>
             </a>
           </li>
-          
-          
-          
-          
-          
+          <li class="nav-item hoverku">
+            <a href="{{ url('/desain/kartu', []) }}" class="nav-link @yield('activekuDesain')">
+              <i class="nav-icon fa fa-address-card"></i>
+              <p>
+                CETAK KARTU
+              </p>
+            </a>
+          </li>
+
+
+
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -277,18 +285,17 @@
           </div>
         </div>
       </section>
-      
+
       <!-- Main content -->
       <section class="content mx-4">
         {{-- <div class="container"> --}}
           @yield('content')
         {{-- </div> --}}
-        
+
       </section>
       <!-- /.content -->
     </div><!-- /.container-fluid -->
   </div>
-  <!-- /.content-wrapper -->
 
   <footer class="main-footer text-sm footerku">
     <div class="float-right d-none d-sm-block">

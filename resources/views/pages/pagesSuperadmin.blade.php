@@ -1,6 +1,6 @@
 @extends('layout.layoutAdmin')
 
-@section('activekuHome')
+@section('activekuSuperadmin')
     activeku
 @endsection
 
@@ -15,7 +15,7 @@
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#tambahSuperadmin">
             Tambah Superadmin
         </button>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="tambahSuperadmin" tabindex="-1" aria-labelledby="tambahSuperadminLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -60,7 +60,7 @@
                   <button class="btn btn-outline-success" type="submit" id="button-addon2">Cari</button>
                 </div>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -148,13 +148,13 @@
                         </div>
                     </div>
 
-                    
-                        
+
+
                     @endforeach
                 </tbody>
             </table>
-        </div>  
-    </div>    
+        </div>
+    </div>
 
 
 @endsection

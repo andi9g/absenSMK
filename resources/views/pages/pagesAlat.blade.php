@@ -1,11 +1,11 @@
 @extends('layout.layoutAdmin')
 
 @php
-  
+
 
 @endphp
 
-@section('activekuAlat')
+@section('activekuMaster')
     activeku
 @endsection
 
@@ -22,7 +22,7 @@
         </button>
 
         <a href="{{ url('/alat', []) }}" class="btn btn-secondary">Refresh</a>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="ruangan" tabindex="-1" aria-labelledby="ruanganLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -41,7 +41,7 @@
                                 <label for='foralat' class='text-capitalize'>Nama Alat</label>
                                 <input type='text' name='alat' id='foralat' class='form-control' placeholder='masukan nama alat'>
                             </div>
-                        </div>    
+                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -61,7 +61,7 @@
                   <button class="btn btn-outline-success" type="submit" id="button-addon2">Cari</button>
                 </div>
             </div>
-            
+
         </form>
     </div>
 </div>
@@ -71,7 +71,7 @@
     @foreach ($alat as $data)
     <div class="col-md-3 m-3 rounded-lg text-center bg-dark">
             <h1 class="text-bold text-capitalize">{{ $data->namaalat }}</h1>
-        
+
             <div class="row">
                 <div class="col-sm-6 mx-0 px-0">
                     <button type="button" class="btn btn-success btn-block rounded-0" data-toggle="modal" data-target="#info{{ $data->idalat }}" ><i class="fa fa-eye"></i></button>
@@ -99,7 +99,7 @@
             </button>
             </div>
             <div class="modal-body">
-                
+
                 <div class="form-group">
                     <label for="">PERANGKAT</label>
                     <input type="text" readonly class="form-control" value="{{ $data->perangkat }}">
@@ -121,7 +121,7 @@
                     $myUrl = str_replace("localhost", $_SERVER['REMOTE_ADDR'], $myUrl);
                     $myUrl = str_replace("::1", "Ipaddress or DNS", $myUrl);
                 @endphp
-                
+
 
                 <div class="form-group">
                     <label for="">LINKS</label>
@@ -145,15 +145,15 @@
         </div>
     </div>
 
-        
+
     @endforeach
 
 
 
 
-    
 
-</div>  
+
+</div>
 
 
 @endsection
@@ -165,7 +165,7 @@
 @include('layout.layoutJS')
 
 {{-- <script>
-    
+
     $(document).ready(function(){
         $("#getUID").load("{{ url('alatUID/alatContainer.php') }}");
         setInterval(function() {
@@ -176,9 +176,9 @@
                 console.log('kosong');
                 // document.forms["myForm"].submit();
             }
-            
+
         }, 500);
     });
 </script> --}}
-    
+
 @endsection

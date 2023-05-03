@@ -18,7 +18,7 @@ Route::get('scan', 'scanC@scan');
 Route::get('adminScan', 'scanC@adminscan');
 
 //post kartu
-Route::get('/', 'indexController@root');
+Route::get('/', 'umumC@root');
 // Route::get('/', 'indexController@index');
 
 //login and logout
@@ -27,8 +27,7 @@ Route::get('login', 'aksesC@login');
 Route::post('login', 'aksesC@proses')->name('login.proses');
 
 //API
-Route::get('api/krs_matkul/{id}','APIC@krs_matkul');
-Route::get('api/jadwal/{tahun}','APIC@APIMatkul');
+
 
 Route::get('token_csrf', 'aksesC@csrf');
 
@@ -39,6 +38,12 @@ Route::middleware(['Gerbang'])->group(function () {
     Route::post('admin/reset/{id}', 'adminC@reset')->name('reset.admin')->middleware('GerbangSuperadmin');
     Route::put('admin/edit/{id}', 'adminC@update')->name('update.admin')->middleware('GerbangSuperadmin');
     Route::delete('admin/delete/{id}', 'adminC@destroy')->name('delete.admin')->middleware('GerbangSuperadmin');
+
+    Route::get('desain/kartu', 'desainC@index');
+    Route::put('desain/kartu/updateGambar/{idsiswa}', 'desainC@updategambar')->name('update.gambar');
+
+    Route::get('kartu/cetak/satuan/{nisn}', 'kartuC@cetakSatuan')->name('cetak.satuan');
+    Route::get('kartu/cetak/berdasarkan/{kelas}/{jurusan}', 'kartuC@cetak')->name('cetak.berdasarkan');
 
     //sinkron
     Route::get('sinkron', 'siswaC@sinkron');

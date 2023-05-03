@@ -16,7 +16,7 @@ class aksesC extends Controller
 
     public function login()
     {
-        return view('pages.pagesLogin');
+        return view('pages.pageslogin');
     }
 
     public function ubahPassword(Request $request)
@@ -28,7 +28,7 @@ class aksesC extends Controller
             $password2 = $request->password2;
 
             if($password1 === $password2) {
-                
+
                 $password = Hash::make($password1);
                 if($posisi == 'admin') {
                     $update = adminM::where('id', $id)->update([
@@ -44,7 +44,7 @@ class aksesC extends Controller
             }else {
                 return redirect()->back()->with('toast_error', 'Terjadi kesalahan');
             }
-            
+
             if ($update) {
                 session_start();
                 session_destroy();
@@ -88,7 +88,7 @@ class aksesC extends Controller
                 $proses = adminM::where('username', $username);
 
                 if ($proses->count() === 1) {
-                    
+
                     $data = $proses->first();
                     if(Hash::check($password, $data->password)){
                         session_start();
@@ -96,10 +96,10 @@ class aksesC extends Controller
                         $request->session()->put('posisi', "admin");
                         $request->session()->put('nama', $data->nama);
                         $request->session()->put('id', $data->id);
-                        
+
                         $_SESSION['perangkat'] = $data->perangkat;
                         $_SESSION['computerId'] = $data->computerId;
-                        
+
                         return redirect('absen')->with('success', 'welcome');
                     }else {
                         return redirect('login')->with('toast_error', 'username atau password tidak benar');
@@ -113,7 +113,7 @@ class aksesC extends Controller
                 $proses = superadmin::where('username', $username);
 
                 if($proses->count()===1) {
-                    
+
                     $data = $proses->first();
                     if(Hash::check($password, $data->password)) {
                         $request->session()->put('login', true);
