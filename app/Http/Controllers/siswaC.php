@@ -3,12 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\siswaM;
+use App\Models\siswaInduk;
 use App\Models\jurusanM;
 use App\Models\kelasM;
 use Illuminate\Http\Request;
 
 class siswaC extends Controller
 {
+
+    public function sinkron(Request $request)
+    {
+        $siswaInduk = siswaInduk::get();
+        $siswa = siswaM::get();
+        foreach ($siswa as $s) {
+            $cek = siswaInduk::where('nisn', $s->nis)->count();
+            if($cek === 0){
+                $nis = $s->nis;
+                siswaM::where('nis', $nis)->delete();
+            }
+        }
+
+        foreach ($siswaInduk as $si) {
+            $cek = siswaM::where('nis', $si->nisn)->count();
+
+            if ($cek === 0) {
+                siswaM::insert([
+                    'nis' => $si->nisn,
+                    'namasiswa' => $si->nama,
+                    'jk' => $si->jk,
+                    'tahunmasuk' => "2000",
+                    'idjurusan' => $si->idjurusan,
+                    'idkelas' => $si->idkelas,
+                ]);
+            }else {
+                siswaM::where('nis', $si->nisn)
+                ->update([
+                    'namasiswa' => $si->nama,
+                    'jk' => $si->jk,
+                    'idjurusan' => $si->idjurusan,
+                    'idkelas' => $si->idkelas,
+                ]);
+            }
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +54,10 @@ class siswaC extends Controller
     public function index(Request $request)
     {
 
-        $jurusan = empty($request->jurusan)?"":$request->jurusan; 
-        $kelas = empty($request->kelas)?"":$request->kelas; 
-        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk; 
-        $keyword = empty($request->keyword)?"":$request->keyword; 
+        $jurusan = empty($request->jurusan)?"":$request->jurusan;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk;
+        $keyword = empty($request->keyword)?"":$request->keyword;
 
         $kelas_ = kelasM::select('idkelas',"namakelas")->orderBy('idkelas', 'asc')->get();
         $jurusan_ = jurusanM::select('idjurusan',"namajurusan")->orderBy('idjurusan', 'asc')->get();
@@ -36,7 +73,7 @@ class siswaC extends Controller
         ->paginate(15);
 
         $tampil->appends($request->only('keyword', 'tahun', 'jurusan', 'kelas', 'limit'));
-        
+
         return view('pages.pagesSiswa',[
             'Dtahun' => $tahun_,
             'tahun' => $tahun,
@@ -141,15 +178,15 @@ class siswaC extends Controller
             'kelas' => 'required',
             'tahun' => 'required',
         ]);
-        
-        
+
+
         try{
             $namasiswa = $request->namasiswa;
             $jk = $request->jk;
             $jurusan = $request->jurusan;
             $kelas = $request->kelas;
             $tahun = $request->tahun;
-        
+
             $update = siswaM::where('nis', $nis)->update([
                 'namasiswa' => $namasiswa,
                 'jk' => $jk,

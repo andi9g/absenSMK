@@ -39,7 +39,9 @@ Route::middleware(['Gerbang'])->group(function () {
     Route::post('admin/reset/{id}', 'adminC@reset')->name('reset.admin')->middleware('GerbangSuperadmin');
     Route::put('admin/edit/{id}', 'adminC@update')->name('update.admin')->middleware('GerbangSuperadmin');
     Route::delete('admin/delete/{id}', 'adminC@destroy')->name('delete.admin')->middleware('GerbangSuperadmin');
-    
+
+    //sinkron
+    Route::get('sinkron', 'siswaC@sinkron');
     //siswa
     Route::resource('siswa', 'siswaC');
 
@@ -70,52 +72,52 @@ Route::middleware(['Gerbang'])->group(function () {
 
     Route::get('pengaturan', 'pengaturanC@index');
     Route::post('pengaturan', 'pengaturanC@store')->name('pengaturan.store');
-    
+
     //dashboard
     // Route::get('/welcome', 'indexController@welcome');
-    
+
     //ganti password
     Route::put('gantipassword', 'aksesC@ubahPassword')->name('ubah.password');
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
     //laporan
     Route::get('laporan', 'cetakC@index');
     Route::get('laporan/cetak', 'cetakC@cetak')->name('cetak.laporan');
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
     //krs mahasiswa
     Route::get('mahasiswa/krs', 'krsC@index');
     Route::post('mahasiswa/krs/import/{id}', 'krsC@import')->name('import.krsmatkul');
     // Route::get('mahasiswa/krs/detail/{id_krs}', 'krsC@detail');
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     //superadmin
     Route::get('superadmin', 'superadminC@index')->middleware('GerbangSuperadmin');
     Route::post('superadmin/tambah', 'superadminC@store')->name('tambah.superadmin')->middleware('GerbangSuperadmin');
     Route::post('superadmin/reset/{id}', 'superadminC@reset')->name('reset.superadmin')->middleware('GerbangSuperadmin');
     Route::patch('superadmin/update/{id}', 'superadminC@update')->name('update.superadmin')->middleware('GerbangSuperadmin');
     Route::delete('superadmin/hapus/{id}', 'superadminC@destroy')->name('hapus.superadmin')->middleware('GerbangSuperadmin');
-    
+
     //faker
     // Route::get('faker', 'indexController@faker')->middleware('GerbangSuperadmin');
 });

@@ -25,7 +25,7 @@
                     @endforeach
                   </select>
                 </div>
-                
+
                 <div class="col-md-4">
                   <select name="kelas" id="" class="form-control" onchange="submit()">
                     <option value="">kelas</option>
@@ -43,7 +43,7 @@
                       <option value="{{ $item->tahunmasuk }}" @if ($item->tahunmasuk == $tahun)
                           selected
                       @endif>{{ $item->tahunmasuk }}</option>
-                          
+
                       @endforeach
                   </select>
                 </div>
@@ -52,7 +52,7 @@
           </form>
         </div>
         <div class="col-md-5">
-          
+
         </div>
       </div>
 
@@ -66,7 +66,7 @@
                   <button class="btn btn-outline-success" type="submit" id="button-addon2">Cari</button>
                 </div>
             </div>
-            
+
         </form>
     </div>
 
@@ -75,7 +75,7 @@
       <button type="button" class="btn btn-primary btn-xs btn-lg mb-2" data-toggle="modal" data-target="#tambahSiswa">
         <i class="fa fa-user-plus"></i> Tambah Siswa
       </button>
-      
+
       <!-- Modal -->
       <div class="modal fade" id="tambahSiswa" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -113,7 +113,7 @@
                       Perempuan
                     </label>
                   </div>
-                  
+
               </div>
 
               <div class='form-group'>
@@ -143,14 +143,14 @@
                   <input type='number' name='tahun' id='fortahun' class='form-control' placeholder='masukan tahun'>
               </div>
 
-              
+
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save</button>
             </div>
-            </form> 
+            </form>
           </div>
         </div>
       </div>
@@ -170,13 +170,13 @@
           <th>NIS</th>
           <th>Nama Siswa</th>
           <th>Jenis Kelamin</th>
-          <th>Tahun Masuk</th>
+          {{-- <th>Tahun Masuk</th> --}}
           <th>Kelas</th>
           <th>Jurusan</th>
           <th>Jurusan</th>
         </tr>
       </thead>
-  
+
       <tbody>
         @foreach ($tampil as $item)
             <tr>
@@ -184,7 +184,7 @@
               <td>{{$item->nis}}</td>
               <td>{{$item->namasiswa}}</td>
               <td>{{$item->jk}}</td>
-              <td>{{$item->tahunmasuk}}</td>
+              {{-- <td>{{$item->tahunmasuk}}</td> --}}
               <td>{{$item->namakelas}}</td>
               <td>{{$item->namajurusan}}</td>
               <td>
@@ -192,12 +192,12 @@
                 <button type="button" class="badge badge-primary border-0 d-inline" data-toggle="modal" data-target="#editdata{{$item->nis}}">
                   <i class="fa fa-edit"></i> Edit
                 </button>
-                
+
                 <!-- Button trigger modal -->
                 <button type="button" class="badge badge-danger border-0 d-inline" data-toggle="modal" data-target="#hapusdata{{$item->nis}}">
                   <i class="fa fa-trash"></i> Hapus
                 </button>
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="hapusdata{{$item->nis}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -224,8 +224,8 @@
                 </div>
               </td>
             </tr>
-            
-            
+
+
             <div class="modal fade" id="editdata{{$item->nis}}" tabindex="-1" role="dialog" aria-labelledby="editdata" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -262,9 +262,9 @@
                             Perempuan
                           </label>
                         </div>
-                        
+
                     </div>
-      
+
                     <div class='form-group'>
                         <label for='forjurusan' class='text-capitalize'>Jurusan</label>
                         <select name='jurusan' id='forjurusan' class='form-control'>
@@ -275,7 +275,7 @@
                           @endforeach
                         <select>
                     </div>
-      
+
                     <div class='form-group'>
                         <label for='forkelas' class='text-capitalize'>Kelas</label>
                         <select name='kelas' id='forkelas' class='form-control'>
@@ -286,7 +286,7 @@
                           @endforeach
                         <select>
                     </div>
-      
+
                     <div class='form-group'>
                         <label for='fortahun' class='text-capitalize'>Tahun</label>
                         <input type='number' name='tahun' id='fortahun' class='form-control' value="{{$item->tahunmasuk}}">
@@ -304,9 +304,9 @@
               </div>
             </div>
 
-            
+
         @endforeach
-        
+
       </tbody>
     </table>
   </div>
