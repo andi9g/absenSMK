@@ -17,6 +17,10 @@
         <a href="{{ route('cetak.berdasarkan', [empty($pkelas)?'0':$pkelas, empty($pjurusan)?'0':$pjurusan]) }}" target="_blank" class="btn btn-danger my-2">
             <i class="fa fa-print"></i> CETAK KARTU
         </a>
+
+        <a href="{{ route('cetak.belakang')}}" target="_blank" class="btn btn-secondary my-2">
+            <i class="fa fa-print"></i> CETAK BELAKANG
+        </a>
     </div>
 </div>
 <form action="{{ url()->current() }}" class="d-block ">

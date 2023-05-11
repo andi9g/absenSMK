@@ -43,6 +43,7 @@ Route::middleware(['Gerbang'])->group(function () {
     Route::put('desain/kartu/updateGambar/{idsiswa}', 'desainC@updategambar')->name('update.gambar');
 
     Route::get('kartu/cetak/satuan/{nisn}', 'kartuC@cetakSatuan')->name('cetak.satuan');
+    Route::get('kartu/cetakbelakang', 'kartuC@cetakbelakang')->name('cetak.belakang');
     Route::get('kartu/cetak/berdasarkan/{kelas}/{jurusan}', 'kartuC@cetak')->name('cetak.berdasarkan');
 
     //sinkron
