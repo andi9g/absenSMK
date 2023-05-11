@@ -21,10 +21,14 @@ class kartuC extends Controller
         ->orderBy('kelas.kelas', 'asc')
         ->orderBy('jurusan.jurusan', 'desc')
         ->orderBy('siswa.nama', 'asc')
+        ->where('siswa.gambar', "!=", null)
         ->where('kelas.idkelas','like', $pkelas."%")
         ->where('jurusan.idjurusan','like', $pjurusan."%")
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
         ->get();
+        
+        
+        
 
         $pdf = PDF::LoadView('laporan.pagesCetak', [
             'siswa' => $siswa,

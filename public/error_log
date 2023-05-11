@@ -1,0 +1,1 @@
+[04-May-2023 11:55:34 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 606208 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/lib/Cpdf.php on line 2318

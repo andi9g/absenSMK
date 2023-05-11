@@ -1,6 +1,6 @@
 @php
-    $w = 344.03937008 * 3.125;
-    $h = 215.09448819 * 3.125;
+    $w = 332.03937008 * 3.125;
+    $h = 210.06448819 * 3.125;
     // $photo = 56.590551181 * 3.125;
     $photo = 55.590551181 * 3.125;
     $p = 1 * 3.125;
@@ -80,7 +80,11 @@
                 </td>
                 <td valign="top" style="padding: 30px" class="identitas">
                     <br><br><br>
-                    <table style="font-size: 6pt;border-collapse: collapse;margin-top:30px" border="0" class="lh">
+                    <table style="font-size: 6pt;border-collapse: collapse;@if($item->jurusan=='DPIB' || $item->jurusan=='ATPH')
+                        margin-top:22px
+                    @else
+                        margin-top:45px
+                    @endif" border="0" class="lh">
                         <tr style="background: rgba(194, 194, 194, 0.356)">
                             <td valign="top"  >Nama</td>
                             <td valign="top">:&nbsp;</td>
@@ -89,7 +93,8 @@
                         <tr >
                             <td valign="top">Jurusan</td>
                             <td valign="top">:</td>
-                            <td valign="top">{{$item->namajurusan}} ({{$item->jurusan}})</td>
+                            <td valign="top">{{$item->namajurusan}} ({{$item->jurusan}})
+                            </td>
                         </tr>
                         <tr style="background: rgba(194, 194, 194, 0.356)">
                             <td valign="top">TTL</td>
@@ -99,7 +104,17 @@
                         <tr>
                             <td valign="top">Alamat </td>
                             <td valign="top">:</td>
-                            <td valign="top" style="padding: 5px 0px;line-height: normal">{{$item->alamat}}</td>
+                            <td valign="top" style="padding: 5px 0px;line-height: normal">
+                                @php
+                                    $teks = $item->alamat;
+                                    $jumlah = strlen($teks);
+                                    
+                                    $ekor = mb_substr($teks, -2);
+                                    $ekor = str_replace(",", "", $ekor);
+                                    $teks = substr($teks, 0, ($jumlah-2));
+                                    $teks = $teks.$ekor;
+                                @endphp
+                                {{$teks}}</td>
                         </tr>
                     </table>
 

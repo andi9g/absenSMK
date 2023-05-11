@@ -36,7 +36,7 @@
               <img class="card-img-top" src="holder.js/100px180/" alt="">
               <div class="card-body">
                 <h4 class="card-title">
-                    Kehadiran Siswa pada hari <b>{{\Carbon\Carbon::parse($tanggal)->isoFormat('dddd, DD MMMM Y')}}</b>
+                    Kehadiran Siswa/i pada hari <b>{{\Carbon\Carbon::parse($tanggal)->isoFormat('dddd, DD MMMM Y')}}</b>
                 </h4>
 
                 <table class="table table-sm table-hover table-striped table-bordered">
