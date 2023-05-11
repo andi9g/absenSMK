@@ -65,7 +65,7 @@
 
     <div class="cetak">
 
-        @for ($i=0; $i<10; $i++)
+        @for ($i=0; $i<9; $i++)
         <div class="kartu">
 
         </div>
