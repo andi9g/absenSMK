@@ -23,7 +23,6 @@ class desainC extends Controller
 
         $siswaInduk = new siswaInduk;
         $siswaInduk->setConnection('mysql2');
-
         $siswa = $siswaInduk->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
         ->where(function ($query) use ($keyword){
@@ -39,6 +38,8 @@ class desainC extends Controller
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
         // ->orderBy()
         ->paginate(15);
+
+        $nisnData = $siswaInduk->select('nisn','nama')->get();
 
         $jml = $siswaInduk->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
@@ -62,7 +63,7 @@ class desainC extends Controller
             'siswa' => $siswa,
             'kelas' => $kelas,
             'jurusan' => $jurusan,
-
+            'nisndata' => $nisnData,
             'pkelas' => $pkelas,
             'pjurusan' => $pjurusan,
             'jml' => $jml,

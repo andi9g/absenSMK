@@ -8,6 +8,19 @@
     <i class="fa fa-users"></i> Cetak Kartu
 @endsection
 
+
+@section('atas')
+<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
+<link href="{{ url('select2/dist/css/select2.min.css', []) }}" rel="stylesheet" />
+<script src="{{ url('select2/dist/js/select2.min.js', []) }}"></script>
+@endsection
+
+
+<style>
+    span .select2-selection__choice__display {
+        color: black;
+    }
+</style>
 @section('content')
 
 
@@ -21,6 +34,49 @@
         <a href="{{ route('cetak.belakang')}}" target="_blank" class="btn btn-secondary my-2">
             <i class="fa fa-print"></i> CETAK BELAKANG
         </a>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#nisncetak">
+          <i class="fa fa-print"></i> NISN
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="nisncetak" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">CETAK</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+
+                    <form action="{{ route('cetak.nisn', []) }}" method="get" target="_blank">
+                    <div class="modal-body">
+
+                        <select required class="form-control pilihannisn text-dark" name="nisn[]" style="width:100%" multiple="multiple">
+                            <option value="">Pilih</option>
+                            @foreach ($nisndata as $id)
+                                <option value="{{$id->nisn}}">{{$id->nisn." - ".$id->nama}}</option>
+
+                            @endforeach
+
+                        </select>
+                        <script>
+                            $(".pilihannisn").select2({
+                                tags: true
+                            });
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <form action="{{ url()->current() }}" class="d-block ">
@@ -99,7 +155,7 @@
                               <i class="fa fa-image"></i> Tambar Gambar
                             </button>
 
-                            <a href="{{ route('cetak.satuan', [$item->nisn]) }}" class="badge badge-danger border-0 py-1">
+                            <a target="_blank" href="{{ route('cetak.satuan', [$item->nisn]) }}" class="badge badge-danger border-0 py-1">
                                 <i class="fa fa-print"></i> Kartu Ujian
                             </a>
                         </td>

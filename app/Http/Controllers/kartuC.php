@@ -37,6 +37,58 @@ class kartuC extends Controller
         return $pdf->stream('buka.pdf');
     }
 
+    public function cetakNisn(Request $request)
+    {
+        $request->validate([
+            'nisn' => 'required',
+        ]);
+
+        $nisn = $request->nisn;
+
+        $siswaInduk = new siswaInduk;
+        $siswaInduk->setConnection('mysql2');
+        $siswa = $siswaInduk->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
+        ->orderBy('kelas.kelas', 'asc')
+        ->orderBy('jurusan.jurusan', 'desc')
+        ->orderBy('siswa.nama', 'asc')
+        ->where('siswa.gambar', "!=", null)
+        ->whereIn('siswa.nisn', $nisn)
+        ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
+        ->get();
+
+
+        $pdf = PDF::LoadView('laporan.pagesCetak', [
+            'siswa' => $siswa,
+        ])->setPaper('a4', 'landscape');
+
+        return $pdf->stream('buka.pdf');
+    }
+
+    public function cetakSatuan(Request $request, $nisn)
+    {
+
+        // dd($pkelas);
+        $siswaInduk = new siswaInduk;
+        $siswaInduk->setConnection('mysql2');
+        $siswa = $siswaInduk->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
+        ->orderBy('kelas.kelas', 'asc')
+        ->orderBy('jurusan.jurusan', 'desc')
+        ->orderBy('siswa.nama', 'asc')
+        ->where('siswa.gambar', "!=", null)
+        ->where('siswa.nisn', $nisn)
+        ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
+        ->get();
+
+
+        $pdf = PDF::LoadView('laporan.pagesCetak', [
+            'siswa' => $siswa,
+        ])->setPaper('a4', 'landscape');
+
+        return $pdf->stream('buka.pdf');
+    }
+
     public function cetakbelakang(Request $request)
     {
         $pdf = PDF::LoadView('laporan.pagesCetakBelakang')->setPaper('a4', 'landscape');
