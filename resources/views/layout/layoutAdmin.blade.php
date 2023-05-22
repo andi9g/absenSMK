@@ -135,7 +135,7 @@
     <!-- Brand Logo -->
     <a href="{{ url('/welcome', []) }}" class="brand-link pink-gelapku">
       <h3 class="brand-image rounded-circle bg-info px-1 text-bold" style="padding-top:2px ">SI</h3>
-      <span class="brand-text text-bold text-white" style="font-size: 17px;letter-spacing: 2px">ABSENSI E-KTM</span>
+      <span class="brand-text text-bold text-white" style="font-size: 17px;letter-spacing: 2px">ABSENSI</span>
     </a>
 
     <!-- Sidebar -->
