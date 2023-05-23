@@ -57,7 +57,7 @@ class kartuC extends Controller
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
         ->get();
 
-        // dd($siswa);
+
         $pdf = PDF::LoadView('laporan.pagesCetak', [
             'siswa' => $siswa,
         ])->setPaper('a4', 'landscape');

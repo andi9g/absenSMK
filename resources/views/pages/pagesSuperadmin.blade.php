@@ -11,7 +11,6 @@
 @section('content')
 <div class="row">
     <div class="col-md-6">
-        <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#tambahSuperadmin">
             Tambah Superadmin
         </button>
