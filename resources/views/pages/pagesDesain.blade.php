@@ -70,11 +70,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<<<<<<< HEAD
-                        <button type="submit" class="btn btn-primary">Print</button>
-=======
                         <button type="submit" class="btn btn-primary">Proses</button>
->>>>>>> 4e9ea5bb8b56ff0f06fb11fe879dd916c735b353
                     </div>
                 </form>
                 </div>
