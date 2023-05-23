@@ -104,13 +104,13 @@
                     @endphp
                     @foreach ($s['absen'] as $a)
                         <td @if ($a['ket']=="A")
-                        style="background: rgb(255, 172, 172)"
+                        style="background: rgb(255, 172, 172);max-width: 30px"
                         @elseif($a['ket']=="S")
-                        style="background: rgb(169, 209, 255)"
+                        style="background: rgb(169, 209, 255);max-width: 30px"
                         @elseif($a['ket']=="I")
-                        style="background: rgb(255, 249, 166)"
+                        style="background: rgb(255, 249, 166);max-width: 30px"
                         @elseif($a['ket']=="H")
-                        style="background: rgb(164, 255, 160)"
+                        style="background: rgb(164, 255, 160);max-width: 30px"
                         @endif class="text-family">
 
                         @php
