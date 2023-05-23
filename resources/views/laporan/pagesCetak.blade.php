@@ -72,7 +72,13 @@
             <tr>
                 <td height="100%" width="35%" align="center">
                     <br><br>
+                    @if (!empty($item->gambar))
+
                     <img src="{{ url('gambar/siswa', [$item->gambar]) }}" alt="" style="width:{{$photo}}px;margin-top:5px;" class="photo">
+                    @else
+
+                        <div class="" style="width:160px;height:200px;border:4px solid white;margin-left:95px;margin-bottom: 20px" class="photo"></div>
+                    @endif
 
                     <p style="font-family:Arial, Helvetica, sans-serif;margin:0;padding: 0px auto;margin:0px auto;color:rgb(57, 26, 230);font-size:6.5pt;line-height: 20px;margin-top: 17px"><b>NISN</b></p>
                     <hr width="43%" style="padding: 0px auto;margin:0px auto">
@@ -108,7 +114,7 @@
                                 @php
                                     $teks = $item->alamat;
                                     $jumlah = strlen($teks);
-                                    
+
                                     $ekor = mb_substr($teks, -2);
                                     $ekor = str_replace(",", "", $ekor);
                                     $teks = substr($teks, 0, ($jumlah-2));

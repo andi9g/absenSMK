@@ -52,12 +52,12 @@ class kartuC extends Controller
         ->orderBy('kelas.kelas', 'asc')
         ->orderBy('jurusan.jurusan', 'desc')
         ->orderBy('siswa.nama', 'asc')
-        ->where('siswa.gambar', "!=", null)
+        // ->where('siswa.gambar', "!=", null)
         ->whereIn('siswa.nisn', $nisn)
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
         ->get();
 
-
+        // dd($siswa);
         $pdf = PDF::LoadView('laporan.pagesCetak', [
             'siswa' => $siswa,
         ])->setPaper('a4', 'landscape');
