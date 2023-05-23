@@ -45,12 +45,12 @@ class cetakC extends Controller
         $t1 = new DateTime($tanggal1 );
         $t2 = new DateTime($tanggal2);
         $end = $t2->modify( '+1 day' );
-        
+
 
         $interval = new DateInterval('P1D');
         $daterange = new DatePeriod($t1, $interval ,$end);
-        
-        
+
+
         foreach($daterange as $date){
             $hari = \Carbon\Carbon::parse($date->format('Y-m-d'))->isoFormat('dddd');
 
@@ -78,7 +78,7 @@ class cetakC extends Controller
 
             $dkelas = [];
             foreach ($kel as $k) {
-                
+
                 $siswa = siswaM::where('idjurusan', $j->idjurusan)
                 ->where('idkelas', $k->idkelas)
                 ->orderBy('namasiswa', 'ASC')
@@ -93,6 +93,9 @@ class cetakC extends Controller
                         $keterlambatan = false;
                         if($absen->count()>0) {
                             $ket = $absen->first()->ket;
+                            $jamkeluar = empty($absen->first()->jamkeluar)?false:true;
+
+
                             if ($ket=='H') {
                                 $pengaturan = pengaturanM::first();
                                 $jm = empty($pengaturan->jammasuk)?"07:30":$pengaturan->jammasuk;
@@ -104,10 +107,12 @@ class cetakC extends Controller
                             }
                         }else {
                             $ket = "A";
+                            $jamkeluar = false;
                         }
                         $dket[] = [
                             'tanggalabsen' => $t,
                             'ket' => $ket,
+                            'jamkeluar' => $jamkeluar,
                             'keterlambatan' => $keterlambatan,
                         ];
                     }

@@ -120,7 +120,9 @@
                             }
                         }
                         @endphp
-
+                        @if ($a['jamkeluar']==false)
+                            <font color="red">*</font>
+                        @endif
                     </td>
 
 
