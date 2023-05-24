@@ -92,7 +92,7 @@
             @foreach ($k['siswa'] as $s)
                 <tr>
                     <td align="center">{{$i3++}}</td>
-                    <td nowrap style="white-space: nowrap;">{{ucwords($s["namasiswa"])}}</td>
+                    <td nowrap style="white-space: nowrap;">{{ucwords(strtolower($s["namasiswa"]))}}</td>
                     <td align="center">{{$s["jk"]}}</td>
 
                     @php
