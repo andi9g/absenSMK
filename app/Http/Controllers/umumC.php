@@ -21,7 +21,7 @@ class umumC extends Controller
 
         $siswa = siswaM::leftJoin('absen', 'absen.nis', 'siswa.nis')
         ->where("siswa.namasiswa", 'like', "%$keyword%")
-        ->orWhere('absen.tanggal', 'like', "$tanggal%")
+        ->where('absen.tanggal', 'like', "$tanggal%")
         ->select('siswa.*', 'absen.tanggal', 'absen.ket')
         ->paginate(15);
 
