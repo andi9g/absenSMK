@@ -74,12 +74,9 @@ class absenC extends Controller
         $pengaturan = pengaturanM::first();
         // dd($pengaturan->keterlambatan);
         $siswa = siswaM::join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
-        ->leftJoin('absen', 'absen.nis', 'siswa.nis')
-        ->where('absen.tanggal', null)
-        // ->where('absen.tanggal', $tanggal)
         ->select('siswa.namasiswa', 'siswa.nis', 'jurusan.namajurusan')
         ->get();
-
+        // dd($siswa);
         $jumlahSiswa = siswaM::join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->where(function ($query) use ($keyword){
@@ -156,7 +153,7 @@ class absenC extends Controller
     }
 
 
-    public function keterangan(Request $request)
+    public function keterangan(Request $request, $tanggal)
     {
         $request->validate([
             'siswa' => 'required',
@@ -166,7 +163,7 @@ class absenC extends Controller
         try{
             $siswa = $request->siswa;
             $keterangan = $request->keterangan;
-            $tanggal = date('Y-m-d');
+            $tanggal = date('Y-m-d', strtotime($tanggal));
             $jammasuk = date('H:i');
 
             $cek = absenM::where('tanggal', $tanggal)->where('nis', $siswa)->count();

@@ -77,7 +77,7 @@ Route::middleware(['Gerbang'])->group(function () {
 
 
     Route::get('absen', 'absenC@index');
-    Route::post('absen', 'absenC@keterangan')->name('tambah.keterangan');
+    Route::post('absen/tambah/{tanggal}/keterangan', 'absenC@keterangan')->name('tambah.keterangan');
     Route::put('absen/ubah/{idabsen}', 'absenC@ubahketerangan')->name('ubah.keterangan');
     Route::delete('absen/hapus/{idabsen}', 'absenC@hapusketerangan')->name('hapus.keterangan');
     Route::post('ubahjam', 'absenC@ubahjam')->name('ubah.jam');

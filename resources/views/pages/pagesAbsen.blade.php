@@ -12,7 +12,7 @@
 
 @section('judul')
     <i class="fa fa-user"></i> Absensi Siswa
-    
+
 @endsection
 
 @section('content')
@@ -51,7 +51,7 @@
           <i class="fa fa-question-circle"></i>
         </button>
 
-        
+
         <!-- Modal -->
         <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="ketabsensiswa" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -99,7 +99,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                     </div>
-                    <form action="{{ route('tambah.keterangan', []) }}" method="post">
+                    <form action="{{ route('tambah.keterangan', [$tanggal]) }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class='form-group'>
@@ -107,11 +107,18 @@
                                 <select name='siswa' id='forsiswa' style="width:100% !important;" class='form-control form-control-sm absen-keterangan'>
                                     <option value=''>Identitas Siswa</option>
                                     @foreach ($siswa as $item)
+                                    @php
+                                        $cek = DB::table('absen')->where('nis', $item->nis)
+                                        ->where('tanggal', $tanggal);
+                                    @endphp
+                                        @if ($cek->count() === 0)
                                         <option value="{{$item->nis}}">{{$item->nis}}-{{ucwords($item->namasiswa)}} -[ {{$item->namajurusan}} ]</option>
+
+                                        @endif
                                     @endforeach
                                 <select>
                             </div>
-    
+
                             <div class='form-group'>
                                 <label for='forketerangan' class='text-capitalize'>Keterangan</label>
                                 <select name='keterangan' required id='forketerangan' class='form-control'>
@@ -148,7 +155,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 <form action="{{ url()->current() }}" class="">
@@ -181,7 +188,7 @@
                 <select>
         </div>
         </div>
-        
+
     </div>
     <div class="col-md-6">
             <div class="input-group mb-3">
@@ -190,15 +197,15 @@
                   <button class="btn btn-outline-success" type="submit" id="button-addon2">Cari</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </form>
 
-    
-    
+
+
     <div class="card table-responsive">
-        
+
         <div class="card-body">
             <table class="table table-bordered table-hover table-sm table-striped">
                 <thead>
@@ -218,7 +225,7 @@
 
                 <tbody>
                     @foreach ($absen as $item)
-                        
+
                     <tr>
                         <td class="text-center">{{$loop->iteration + $absen->firstItem() - 1}}</td>
                         <td nowrap class="text-capitalize text-bold">{{$item->nis}}</td>
@@ -228,13 +235,13 @@
                         <td class="text-center">{{$item->jammasuk}}</td>
                         <td class="text-center">{{$item->jamkeluar}}</td>
                         <td align="center" @if ($item->ket == 'H')
-                            class="ket-hijau" 
+                            class="ket-hijau"
                             @elseif($item->ket == 'I')
-                            class="ket-kuning" 
+                            class="ket-kuning"
                             @elseif($item->ket == 'S')
-                            class="ket-biru" 
+                            class="ket-biru"
                             @elseif($item->ket == 'A')
-                            class="ket-merah" 
+                            class="ket-merah"
                             @endif
                             width="30px"
                             >
@@ -245,7 +252,7 @@
                             @elseif($item->ket == 'S')
                             S
                             @elseif($item->ket == 'A')
-                            A 
+                            A
                             @endif
                         </td>
                         <td>
@@ -253,7 +260,7 @@
                                 $jm = empty($pengaturan->jammasuk)?"07:30":$pengaturan->jammasuk;
                                 $kt = empty($pengaturan->keterlambatan)?"0":$pengaturan->keterlambatan;
                                 $ex = strtotime(date('H:i:s', strtotime('+'.$kt.' min', strtotime($jm))));
-                                
+
                             @endphp
                             @if ($item->ket == 'H')
                                 @if (strtotime($item->jammasuk) > $ex)
@@ -268,7 +275,7 @@
                             @elseif($item->ket == 'A')
                             Alfa
                             @endif
-                            
+
 
                         </td>
                         <td nowrap width="1%">
@@ -281,8 +288,8 @@
                             <button type="button" class="badge badge-danger border-0" data-toggle="modal" data-target="#hapusabsen{{$item->idabsen}}">
                               <i class="fa fa-trash"></i>Hapus
                             </button>
-                            
-                            
+
+
 
                         </td>
                     </tr>
@@ -347,14 +354,14 @@
                     @endforeach
                 </tbody>
 
-                
+
 
             </table>
-        </div>  
+        </div>
         <div class="card-footer">
             {{$absen->links('vendor.pagination.bootstrap-4')}}
         </div>
-    </div>    
+    </div>
 
 
 @endsection
@@ -367,5 +374,5 @@
         $('.absen-keterangan').select2();
     });
 </script>
-    
+
 @endsection
