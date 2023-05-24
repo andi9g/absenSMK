@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\siswaM;
 use App\Models\absenM;
+use App\Models\jurusanM;
+use App\Models\kelasM;
 use Illuminate\Http\Request;
 
 class umumC extends Controller
@@ -18,13 +20,21 @@ class umumC extends Controller
     {
         $tanggal = empty($request->tanggal)?date('Y-m-d'):$request->tanggal;
         $keyword = empty($request->keyword)?"":$request->keyword;
+        $jurusan = empty($request->jurusan)?"":$request->jurusan;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+
+        $djurusan = jurusanM::get();
+        $dkelas = kelasM::get();
 
         $siswa = siswaM::join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
         ->where("siswa.namasiswa", 'like', "%$keyword%")
-        ->select('siswa.*')
+        ->where("jurusan.idjurusan", 'like', "$jurusan%")
+        ->where("kelas.idkelas", 'like', "$kelas%")
+        ->select('siswa.*', 'kelas.namakelas')
         ->paginate(15);
 
-        $siswa->appends($request->only(['limit', 'keyword', 'tanggal']));
+        $siswa->appends($request->only(['limit', 'keyword', 'tanggal', 'jurusan', 'kelas']));
 
 
 
@@ -32,6 +42,11 @@ class umumC extends Controller
             'siswa' => $siswa,
             'tanggal' => $tanggal,
             'keyword' => $keyword,
+            'jurusan' => $jurusan,
+            'kelas' => $kelas,
+
+            'datajurusan' => $djurusan,
+            'datakelas' => $dkelas,
         ]);
     }
 
