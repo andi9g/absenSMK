@@ -13,6 +13,46 @@ use Illuminate\Http\Request;
 
 class absenC extends Controller
 {
+
+    public function ubahjammasuk(Request $request)
+    {
+        $absen = absenM::where('tanggal', '2023-05-24')
+        ->where('jammasuk', null)
+        ->get();
+        foreach ($absen as $a) {
+            $id = $a->idabsen;
+            $jammasuk = $a->jamkeluar;
+            $jamkeluar = null;
+
+            $update = absenM::where('idabsen', $id)->update([
+                'jammasuk' => $jammasuk,
+                'jamkeluar' => $jamkeluar,
+                'ket' => 'H',
+            ]);
+
+        }
+        return redirect('absen')->with('success');
+    }
+
+    public function ubahjamkeluar(Request $request)
+    {
+        $absen = absenM::where('tanggal', '2023-05-24')
+        ->where('jamkeluar', null)
+        ->get();
+        foreach ($absen as $a) {
+            $id = $a->idabsen;
+            $jamkeluar = $a->jammasuk;
+            $jammasuk = null;
+
+            $update = absenM::where('idabsen', $id)->update([
+                'jammasuk' => $jammasuk,
+                'jamkeluar' => $jamkeluar,
+                'ket' => 'A',
+            ]);
+
+        }
+        return redirect('absen')->with('success', 'berhasil');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +64,7 @@ class absenC extends Controller
         $jurusan = empty($request->jurusan)?"":$request->jurusan;
         $kelas = empty($request->kelas)?"":$request->kelas;
         $keyword = empty($request->keyword)?"":$request->keyword;
-        
+
         $Djurusan = jurusanM::get();
         $Dkelas = kelasM::get();
 
@@ -154,11 +194,11 @@ class absenC extends Controller
         $request->validate([
             'keterangan' => 'required',
         ]);
-        
-        
+
+
         try{
             $keterangan = $request->keterangan;
-        
+
             $update = absenM::where('idabsen', $idabsen)->update([
                 'ket' => $keterangan,
             ]);

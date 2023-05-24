@@ -52,7 +52,7 @@
             <th width="3%" rowspan="2">NO</th>
             <th nowrap rowspan="2">NAMA SISWA</th>
             <th width="3%" rowspan="2">JK</th>
-            <th colspan="{{count($tanggaltampil)}}">INDIKATOR ABSENSI</th>
+            <th colspan="{{count($tanggaltampil)}}" style="max-width: 10px">INDIKATOR ABSENSI</th>
             <th width="3%" rowspan="2">H</th>
             <th width="3%" rowspan="2">I</th>
             <th width="3%" rowspan="2">A</th>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
             @foreach ($tanggaltampil as $item)
-                <th>{{$item}}</th>
+                <th >{{$item}}</th>
             @endforeach
         </tr>
 
