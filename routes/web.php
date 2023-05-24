@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('ads.txt', function(){
+    return view('pages.ads');
+});
 
 //scan kartu
 Route::get('scan', 'scanC@scan');

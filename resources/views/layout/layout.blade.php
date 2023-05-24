@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url('bootstrap/bootstrap.min.css', []) }}">
     <link rel="stylesheet" href="{{ url('bootstrap/mycss.css', []) }}">
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2496370707792441"
+     crossorigin="anonymous"></script>
 
   </head>
 <body style="background: url('img/patern.png')" class="loaded">
@@ -42,7 +43,7 @@
     </nav>
 
 
-    
+
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-2"></div>
@@ -50,32 +51,47 @@
 
                 @yield('jam')
 
-                
+
                     @yield('content')
-                
-        
+
+
 
             </div>
 
-            
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2496370707792441"
+                crossorigin="anonymous"></script>
+            <!-- iklan2 -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:728px;height:90px"
+                data-ad-client="ca-pub-2496370707792441"
+                data-ad-slot="8704891803"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            </div>
         </div>
     </div>
 
-    
+
 
 
 
 
     <script src="{{ url('bootstrap/jquery.slim.min.js', []) }}"></script>
-    
+
 
     <script src="{{ url('bootstrap/bootstrap.bundle.min.js', []) }}"></script>
     <script src="{{ url('jquery.min.js', []) }}"></script>
 
     @include('sweetalert::alert')
     @yield('myScript')
-    
-    
+
+
 
   </body>
 </html>
