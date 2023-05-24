@@ -19,10 +19,11 @@ class umumC extends Controller
         $tanggal = empty($request->tanggal)?date('Y-m-d'):$request->tanggal;
         $keyword = empty($request->keyword)?"":$request->keyword;
 
-        $siswa = siswaM::leftJoin('absen', 'absen.nis', 'siswa.nis')
+        $siswa = siswaM::rightJoin('absen', 'absen.nis', 'siswa.nis')
+        ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->where("siswa.namasiswa", 'like', "%$keyword%")
         ->where('absen.tanggal', 'like', "$tanggal%")
-        ->select('siswa.*', 'absen.tanggal', 'absen.ket')
+        ->select('siswa.*', 'absen.tanggal', 'absen.ket', 'kelas.namakelas')
         ->paginate(15);
 
         $siswa->appends($request->only(['limit', 'keyword', 'tanggal']));

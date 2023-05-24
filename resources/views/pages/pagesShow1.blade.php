@@ -44,6 +44,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
+                            <th>Kls</th>
                             <th>Ket.</th>
                         </tr>
                     </thead>
@@ -52,6 +53,9 @@
                             <tr>
                                 <td nowrap width="5px">{{$loop->iteration + $siswa->firstItem() - 1 }}</td>
                                 <td>{{ucwords(strtolower($item->namasiswa))}}</td>
+                                <td nowrap>
+                                    {{$item->namakelas}}
+                                </td>
                                 <td>
                                     @if (!empty($item->tanggal))
                                         @if ($item->ket == "H")
