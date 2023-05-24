@@ -31,7 +31,7 @@ class umumC extends Controller
         ->where("siswa.namasiswa", 'like', "%$keyword%")
         ->where("jurusan.idjurusan", 'like', "$jurusan%")
         ->where("kelas.idkelas", 'like', "$kelas%")
-        ->select('siswa.*', 'kelas.namakelas')
+        ->select('siswa.*', 'kelas.namakelas','jurusan.namajurusan')
         ->paginate(15);
 
         $siswa->appends($request->only(['limit', 'keyword', 'tanggal', 'jurusan', 'kelas']));

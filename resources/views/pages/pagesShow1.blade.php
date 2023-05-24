@@ -75,7 +75,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Kls</th>
+                            <th>K/J</th>
                             <th>Ket.</th>
                         </tr>
                     </thead>
@@ -85,7 +85,7 @@
                                 <td nowrap width="5px">{{$loop->iteration + $siswa->firstItem() - 1 }}</td>
                                 <td>{{ucwords(strtolower($item->namasiswa))}}</td>
                                 <td nowrap class="text-center">
-                                    {{$item->namakelas}}
+                                    {{$item->namakelas."-".$item->namajurusan}}
                                 </td>
                                 <td>
                                     @php
