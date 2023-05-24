@@ -57,16 +57,20 @@
                                     {{$item->namakelas}}
                                 </td>
                                 <td>
-                                    @if (!empty($item->tanggal))
-                                        @if ($item->ket == "H")
+                                    @php
+                                        $cek = DB::table('absen')->where('nis', $item->nis)
+                                        ->where('tanggal', $tanggal);
+                                    @endphp
+                                    @if ($cek->count() > 0)
+                                        @if ($cek->first()->ket == "H")
                                         <font class="text-success text-bold">
                                             HADIR
                                         </font>
-                                        @elseif ($item->ket == "S")
+                                        @elseif ($cek->first()->ket == "S")
                                         <font class="text-warning text-bold">
                                             SAKIT
                                         </font>
-                                        @elseif ($item->ket == "I")
+                                        @elseif ($cek->first()->ket == "I")
                                         <font class="text-info text-bold">
                                             IZIN
                                         </font>
