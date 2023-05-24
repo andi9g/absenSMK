@@ -16,7 +16,7 @@ class absenC extends Controller
 
     public function ubahjammasuk(Request $request)
     {
-        $absen = absenM::where('tanggal', '2023-05-24')
+        $absen = absenM::where('tanggal', date('Y-m-d'))
         ->where('jammasuk', null)
         ->get();
         foreach ($absen as $a) {
@@ -34,25 +34,25 @@ class absenC extends Controller
         return redirect('absen')->with('success');
     }
 
-    public function ubahjamkeluar(Request $request)
-    {
-        $absen = absenM::where('tanggal', '2023-05-24')
-        ->where('jamkeluar', null)
-        ->get();
-        foreach ($absen as $a) {
-            $id = $a->idabsen;
-            $jamkeluar = $a->jammasuk;
-            $jammasuk = null;
+    // public function ubahjamkeluar(Request $request)
+    // {
+    //     $absen = absenM::where('tanggal', date('Y-m-d'))
+    //     ->where('jamkeluar', null)
+    //     ->get();
+    //     foreach ($absen as $a) {
+    //         $id = $a->idabsen;
+    //         $jamkeluar = $a->jammasuk;
+    //         $jammasuk = null;
 
-            $update = absenM::where('idabsen', $id)->update([
-                'jammasuk' => $jammasuk,
-                'jamkeluar' => $jamkeluar,
-                'ket' => 'A',
-            ]);
+    //         $update = absenM::where('idabsen', $id)->update([
+    //             'jammasuk' => $jammasuk,
+    //             'jamkeluar' => $jamkeluar,
+    //             'ket' => 'A',
+    //         ]);
 
-        }
-        return redirect('absen')->with('success', 'berhasil');
-    }
+    //     }
+    //     return redirect('absen')->with('success', 'berhasil');
+    // }
     /**
      * Display a listing of the resource.
      *
