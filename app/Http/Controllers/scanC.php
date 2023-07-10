@@ -47,88 +47,90 @@ class scanC extends Controller
 
     public function scan(Request $request)
     {
+
+        return "merah";
         // $uid = str_replace(" ","",$uid);
         // $ex = explode("___", $uid);
-        $UID = $request->uid;
-        $key_post = $request->key_post;
-        $computerId = $request->computerId;
-        $perangkat = $request->perangkat;
+        // $UID = $request->uid;
+        // $key_post = $request->key_post;
+        // $computerId = $request->computerId;
+        // $perangkat = $request->perangkat;
 
-        // echo $perangkat;
-        $cek = alatM::where('computerId', $computerId)
-        ->where('key_post', $key_post)
-        ->where('perangkat', $perangkat)
-        ->count();
+        // // echo $perangkat;
+        // $cek = alatM::where('computerId', $computerId)
+        // ->where('key_post', $key_post)
+        // ->where('perangkat', $perangkat)
+        // ->count();
 
-        if($cek === 1) {
-            $open = openM::first();
-            $tanggal = date('Y-m-d');
-            $jam = date('H:i');
+        // if($cek === 1) {
+        //     $open = openM::first();
+        //     $tanggal = date('Y-m-d');
+        //     $jam = date('H:i');
 
-            $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
-            ->select('siswa.nis')
-            ->where('card.uid', $UID);
+        //     $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
+        //     ->select('siswa.nis')
+        //     ->where('card.uid', $UID);
 
 
-            if ($ambil->count() == 0) {
-                $lanjut = "merah";
-            }elseif($ambil->count() == 1) {
-                $nis = $ambil->first()->nis;
+        //     if ($ambil->count() == 0) {
+        //         $lanjut = "merah";
+        //     }elseif($ambil->count() == 1) {
+        //         $nis = $ambil->first()->nis;
 
-                if($open->open == true) {
-                    $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
-                    if($cek == 1) {
-                        $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
-                        $keterangan = $data->ket;
-                        if($keterangan == 'I'){
-                            $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
-                                'ket' => 'H',
-                            ]);
-                            $lanjut = "hijau";
-                        }else {
-                            $lanjut = "kuning";
-                        }
-                    }else if($cek == 0) {
-                        $absen = new absenM;
-                        $absen->nis = $nis;
-                        $absen->tanggal = $tanggal;
-                        $absen->jammasuk = $jam;
-                        $absen->ket = "H";
-                        $absen->save();
-                        $lanjut = "hijau";
-                    }
-                }elseif($open->open == false){
-                    $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
-                    if($cek->count() == 1) {
-                        $jamkeluar = $cek->first()->jamkeluar;
-                        if($jamkeluar == null) {
-                            $update = absenM::where('nis', $nis)->where('tanggal', $tanggal)
-                            ->update([
-                                'jamkeluar' => $jam,
-                            ]);
-                            $lanjut = "hijau";
-                        }else {
-                            $lanjut = "kuning";
-                        }
+        //         if($open->open == true) {
+        //             $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
+        //             if($cek == 1) {
+        //                 $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
+        //                 $keterangan = $data->ket;
+        //                 if($keterangan == 'I'){
+        //                     $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
+        //                         'ket' => 'H',
+        //                     ]);
+        //                     $lanjut = "hijau";
+        //                 }else {
+        //                     $lanjut = "kuning";
+        //                 }
+        //             }else if($cek == 0) {
+        //                 $absen = new absenM;
+        //                 $absen->nis = $nis;
+        //                 $absen->tanggal = $tanggal;
+        //                 $absen->jammasuk = $jam;
+        //                 $absen->ket = "H";
+        //                 $absen->save();
+        //                 $lanjut = "hijau";
+        //             }
+        //         }elseif($open->open == false){
+        //             $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
+        //             if($cek->count() == 1) {
+        //                 $jamkeluar = $cek->first()->jamkeluar;
+        //                 if($jamkeluar == null) {
+        //                     $update = absenM::where('nis', $nis)->where('tanggal', $tanggal)
+        //                     ->update([
+        //                         'jamkeluar' => $jam,
+        //                     ]);
+        //                     $lanjut = "hijau";
+        //                 }else {
+        //                     $lanjut = "kuning";
+        //                 }
 
-                    }else {
-                        $absen = new absenM;
-                        $absen->nis = $nis;
-                        $absen->tanggal = $tanggal;
-                        $absen->jamkeluar = $jam;
-                        $absen->ket = "A";
-                        $absen->save();
-                        $lanjut = "hijau";
-                    }
-                }
+        //             }else {
+        //                 $absen = new absenM;
+        //                 $absen->nis = $nis;
+        //                 $absen->tanggal = $tanggal;
+        //                 $absen->jamkeluar = $jam;
+        //                 $absen->ket = "A";
+        //                 $absen->save();
+        //                 $lanjut = "hijau";
+        //             }
+        //         }
 
-            }
+        //     }
 
-            echo $lanjut;
+        //     echo $lanjut;
 
-        }else {
-            echo "merah";
-        }
+        // }else {
+        //     echo "merah";
+        // }
 
 
     }
