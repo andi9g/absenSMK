@@ -23,13 +23,13 @@ class scanC extends Controller
 
         try{
             $cek = adminM::where('computerId', $computerId)->where('key_post', $key_post)->count();
-            
+
             if($cek === 1) {
                 $Write= "<?php
                             session_start();
                             if($"."_SESSION['perangkat'] === '$perangkat' && $"."_SESSION['computerId']==='$computerId'){
                                     $"."UIDresult= '$UID';
-                                    echo $"."UIDresult; 
+                                    echo $"."UIDresult;
                                 }
                             ?>
                         ";
@@ -39,13 +39,13 @@ class scanC extends Controller
             }else{
                 echo "merah";
             }
-        
+
         }catch(\Throwable $th){
             echo $th;
         }
     }
 
-    public function scan(Request $request) 
+    public function scan(Request $request)
     {
         // $uid = str_replace(" ","",$uid);
         // $ex = explode("___", $uid);
@@ -59,7 +59,7 @@ class scanC extends Controller
         ->where('key_post', $key_post)
         ->where('perangkat', $perangkat)
         ->count();
-        
+
         if($cek === 1) {
             $open = openM::first();
             $tanggal = date('Y-m-d');
@@ -68,13 +68,13 @@ class scanC extends Controller
             $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
             ->select('siswa.nis')
             ->where('card.uid', $UID);
-            
+
 
             if ($ambil->count() == 0) {
                 $lanjut = "merah";
             }elseif($ambil->count() == 1) {
                 $nis = $ambil->first()->nis;
-                
+
                 if($open->open == true) {
                     $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
                     if($cek == 1) {
@@ -110,7 +110,7 @@ class scanC extends Controller
                         }else {
                             $lanjut = "kuning";
                         }
-                        
+
                     }else {
                         $absen = new absenM;
                         $absen->nis = $nis;
@@ -123,14 +123,14 @@ class scanC extends Controller
                 }
 
             }
-            
+
             echo $lanjut;
-            
+
         }else {
             echo "merah";
         }
 
-        
+
     }
 
 
