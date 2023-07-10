@@ -1,1 +1,11 @@
 [04-May-2023 11:55:34 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 606208 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/lib/Cpdf.php on line 2318
+[24-May-2023 14:37:58 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Css/Style.php on line 1308
+[24-May-2023 14:38:04 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Css/Style.php on line 1308
+[24-May-2023 14:41:34 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Css/Style.php on line 1308
+[24-May-2023 14:41:40 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Css/Style.php on line 1308
+[24-May-2023 14:41:58 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 102400 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/lib/Cpdf.php on line 2096
+[24-May-2023 14:43:19 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 102400 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/lib/Cpdf.php on line 2096
+[30-May-2023 14:53:00 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Cellmap.php on line 639
+[17-Jun-2023 11:54:04 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 209715200 bytes exhausted (tried to allocate 122880 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/lib/Cpdf.php on line 3693
+[20-Jun-2023 19:33:25 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 209715200 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Frame/Factory.php on line 202
+[20-Jun-2023 19:33:47 Asia/Jakarta] PHP Fatal error:  Allowed memory size of 209715200 bytes exhausted (tried to allocate 20480 bytes) in /home/smkngunu/absen/vendor/dompdf/dompdf/src/Frame/Factory.php on line 202
