@@ -17,7 +17,7 @@ Route::get('ads.txt', function(){
 });
 
 //scan kartu
-Route::post('scan', 'scanC@scan');
+Route::get('scan', 'scanC@scan');
 Route::get('adminScan', 'scanC@adminscan');
 
 //post kartu
