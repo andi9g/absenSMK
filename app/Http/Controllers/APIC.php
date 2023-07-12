@@ -102,7 +102,7 @@ class APIC extends Controller
         $data = siswaM::join('card', 'card.nis', 'siswa.nis')
         ->select('card.nis', 'card.uid')->take(1)->get();
 
-        return response()->json($data->toArray());
+        echo json_encode($data->toArray());
     }
 
     public function krsmatkul($id)
