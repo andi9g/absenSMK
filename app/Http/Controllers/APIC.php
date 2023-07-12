@@ -100,7 +100,7 @@ class APIC extends Controller
     public function siswa()
     {
         $data = siswaM::join('card', 'card.nis', 'siswa.nis')
-        ->select('card.nis', 'card.uid')->take(20)->get();
+        ->select('card.nis', 'card.uid')->take(1)->get();
 
         return response()->json($data->toArray());
     }
