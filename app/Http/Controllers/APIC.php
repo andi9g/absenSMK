@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\cardM;
-use App\Models\krsM;
-use App\Models\kelas;
-use App\Models\kelasjadwalM;
-use App\Models\krsMatkulM;
+use App\Models\siswaM;
 
 class APIC extends Controller
 {
@@ -48,13 +44,13 @@ class APIC extends Controller
         // $eksekutif_jam_selesai = ["09:50","11:50", "13:20","14:20","15:30"];
         // $json_encode = [];
         // $hari = date('l');
-        // $tahun = $tahun;    
+        // $tahun = $tahun;
         // $kelas_ = kelas::select('kelas')->get();
-        
+
         // foreach ($kelas_ as $kls) {
         //     $kelas = $kls->kelas;
         //     if($kelas == "reguler") {
-        //         for ($i=0; $i < 5; $i++) { 
+        //         for ($i=0; $i < 5; $i++) {
         //             $json_obj = '{
         //                 "kelas":"'.$kelas.'",
         //                 "tahun":"'.$tahun.'",
@@ -67,7 +63,7 @@ class APIC extends Controller
         //             $json_encode[] = json_decode($json_obj);
         //         }
         //     }else if($kelas == "karyawan") {
-        //         for ($i=0; $i < 5; $i++) { 
+        //         for ($i=0; $i < 5; $i++) {
         //             $json_obj = '{
         //                 "kelas":"'.$kelas.'",
         //                 "tahun":"'.$tahun.'",
@@ -80,7 +76,7 @@ class APIC extends Controller
         //             $json_encode[] = json_decode($json_obj);
         //         }
         //     }else if($kelas == "eksekutif") {
-        //         for ($i=0; $i < 5; $i++) { 
+        //         for ($i=0; $i < 5; $i++) {
         //             $json_obj = '{
         //                 "kelas":"'.$kelas.'",
         //                 "tahun":"'.$tahun.'",
@@ -101,13 +97,21 @@ class APIC extends Controller
 
     }
 
+    public function siswa()
+    {
+        $data = siswaM::join('card', 'card.nis', 'siswa.nis')
+        ->select('card.nis', 'card.uid')->get();
+
+        return json_encode($data);
+    }
+
     public function krsmatkul($id)
     {
         $kmatkul_ = ["MK","IF1201","IF1302", "IF1403","IF1204","IF1501"];
         $tahun = date('Y');
         $json_encode = [];
 
-        for ($i=0; $i < 20; $i++) { 
+        for ($i=0; $i < 20; $i++) {
             $id_krs = rand(1, 5);
             $id_penyelenggara = rand(1, 5);
 
