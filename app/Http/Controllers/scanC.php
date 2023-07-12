@@ -49,8 +49,8 @@ class scanC extends Controller
     {
 
         // return "merah";
-        $uid = str_replace(" ","",$uid);
-        $ex = explode("___", $uid);
+        // $uid = str_replace(" ","",$uid);
+        // $ex = explode("___", $uid);
         $UID = $request->uid;
         $key_post = $request->key_post;
         $computerId = $request->computerId;
