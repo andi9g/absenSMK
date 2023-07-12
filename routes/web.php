@@ -22,7 +22,7 @@ Route::get('adminScan', 'scanC@adminscan');
 
 //post kartu
 Route::get('/', 'umumC@root');
-Route::post('/api/data/siswa', 'APIC@siswa');
+Route::get('/api/data/siswa', 'APIC@siswa');
 
 //login and logout
 Route::get('logout', 'aksesC@logout');
