@@ -109,7 +109,7 @@ class APIC extends Controller
     public function data(Request $request)
     {
         $key_post = $_SERVER['HTTP_key_post'];
-        $kunci = $_SERVER['HTTP_KUNCI'];
+        $computerId = $_SERVER['HTTP_computerId'];
 
         try {
             // $jsonData = file_get_contents('php://input');
@@ -118,6 +118,8 @@ class APIC extends Controller
             // foreach ($data as $item) {
             //     echo $item["uid"]."<br>";
             // }
+            echo $key_post;
+            echo $computerId;
             echo "berhasil";
         } catch (\Throwable $th) {
             echo "EROR 404";
