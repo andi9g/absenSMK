@@ -115,7 +115,7 @@ class APIC extends Controller
 
         return response()->json([
             'message' => 'Data diterima',
-            'uid' => $uid
+            'uid' => $data
         ]);
 
     }
