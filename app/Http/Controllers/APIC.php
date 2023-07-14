@@ -108,18 +108,17 @@ class APIC extends Controller
 
     public function data(Request $request)
     {
-        $request->validate([
-            'key_post' => 'required',
-            'computer_id' => 'required',
-        ]);
+        $key_post = $_SERVER['HTTP_key_post'];
+        $kunci = $_SERVER['HTTP_KUNCI'];
 
         try {
-            $jsonData = file_get_contents('php://input');
-            $data = json_decode($jsonData);
+            // $jsonData = file_get_contents('php://input');
+            // $data = json_decode($jsonData);
 
-            foreach ($data as $item) {
-                echo $item["uid"]."<br>";
-            }
+            // foreach ($data as $item) {
+            //     echo $item["uid"]."<br>";
+            // }
+            echo "berhasil";
         } catch (\Throwable $th) {
             echo "EROR 404";
         }
