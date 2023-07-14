@@ -109,12 +109,13 @@ class APIC extends Controller
     public function data(Request $request)
     {
         $kunci = $request->header('key_post');
+        $kunci = $request->header('computerId');
 
         $jsonData = $request->getContent();
         $data = json_decode($jsonData);
 
         foreach ($data as $key) {
-            echo $key['uid']." ";
+            echo $key->uid." ";
         }
 
         // return response()->json([
