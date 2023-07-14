@@ -111,19 +111,21 @@ class APIC extends Controller
         // $key_post = $_SERVER['HTTP_key_post'];
         // $computerId = $_SERVER['HTTP_computerId'];
 
-        try {
-            // $jsonData = file_get_contents('php://input');
-            // $data = json_decode($jsonData);
+        dd($request->getContent());
 
-            // foreach ($data as $item) {
-            //     echo $item["uid"]."<br>";
-            // }
-            echo $key_post;
-            echo $computerId;
-            echo "berhasil";
-        } catch (\Throwable $th) {
-            echo "EROR 404";
-        }
+        // try {
+        //     // $jsonData = file_get_contents('php://input');
+        //     // $data = json_decode($jsonData);
+
+        //     // foreach ($data as $item) {
+        //     //     echo $item["uid"]."<br>";
+        //     // }
+        //     echo $key_post;
+        //     echo $computerId;
+        //     echo "berhasil";
+        // } catch (\Throwable $th) {
+        //     echo "EROR 404";
+        // }
 
 
     }
