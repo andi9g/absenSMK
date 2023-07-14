@@ -108,8 +108,8 @@ class APIC extends Controller
 
     public function data(Request $request)
     {
-        $key_post = $_SERVER['HTTP_key_post'];
-        $computerId = $_SERVER['HTTP_computerId'];
+        $kunci = $request->header('key_post');
+
         $jsonData = $request->getContent();
         $data = json_decode($jsonData);
 
