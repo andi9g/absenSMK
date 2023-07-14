@@ -112,9 +112,13 @@ class APIC extends Controller
         // $computerId = $_SERVER['HTTP_computerId'];
         $jsonData = $request->getContent();
         $data = json_decode($jsonData);
-        foreach ($data as $item) {
-            echo $data->uid;
-        }
+
+        $uid = $data->uid;
+
+        return response()->json([
+            'message' => 'Data diterima',
+            'uid' => $uid
+        ]);
 
     }
 
