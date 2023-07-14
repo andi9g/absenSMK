@@ -117,9 +117,7 @@ class APIC extends Controller
         ->count();
 
         if($cek == 0) {
-            return response()->json([
-                'message' => 'Kunci tidak valid',
-            ], 403);
+            abort(500, 'Kunci tidak valid');
         }else {
             return true;
         }
