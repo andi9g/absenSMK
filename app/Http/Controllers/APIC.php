@@ -113,8 +113,6 @@ class APIC extends Controller
         $jsonData = $request->getContent();
         $data = json_decode($jsonData);
 
-
-
         return response()->json([
             'message' => 'Data diterima',
             'uid' => $uid
