@@ -99,10 +99,32 @@ class APIC extends Controller
 
     public function siswa()
     {
-        $data = siswaM::join('card', 'card.nis', 'siswa.nis')
-        ->select('card.nis', 'card.uid')->take(1)->get();
+        // $data = siswaM::join('card', 'card.nis', 'siswa.nis')
+        // ->select('card.nis', 'card.uid')->get();
 
-        echo json_encode($data->toArray());
+        // // $posts = Post::latest()->get();
+        // return response()->json($data, 200);
+    }
+
+    public function data(Request $request)
+    {
+        $request->validate([
+            'key_post' => 'required',
+            'computer_id' => 'required',
+        ]);
+
+        try {
+            $jsonData = file_get_contents('php://input');
+            $data = json_decode($jsonData);
+
+            foreach ($data as $item) {
+                echo $item["uid"]."<br>";
+            }
+        } catch (\Throwable $th) {
+            echo "EROR 404";
+        }
+
+
     }
 
     public function krsmatkul($id)

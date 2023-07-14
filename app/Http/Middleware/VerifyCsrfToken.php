@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'scan',
         'adminScan',
-        '/api/data/siswa',
+        '/api/data/iot',
     ];
 }
