@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\siswaM;
 use App\Models\alatM;
+use App\Models\openM;
+// use App\Models\siswaM;
 
 class APIC extends Controller
 {
@@ -120,28 +122,71 @@ class APIC extends Controller
             abort(500, 'Kunci tidak valid');
         }else {
             $jsonData = $request->getContent();
-            $data = json_decode($jsonData);
+            $json = json_decode($jsonData);
 
-            foreach ($data as $key) {
-                # code...
-                return date('Y-m-d H:i:s', $key->waktu);
+            $open = openM::first();
+
+            foreach ($json as $key) {
+                $tanggal = date('Y-m-d', $key->waktu);
+                $jam = date('H:i', $key->waktu);
+
+                $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
+                ->select('siswa.nis')
+                ->where('card.uid', $key->uid);
+
+                if($ambil->count() == 1) {
+                    $nis = $ambil->first()->nis;
+
+                    if($open->open == true) {
+                        $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
+                        if($cek == 1) {
+                            $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
+                            $keterangan = $data->ket;
+                            if($keterangan == 'I'){
+                                $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
+                                    'ket' => 'H',
+                                ]);
+                            }
+                        }else if($cek == 0) {
+                            $absen = new absenM;
+                            $absen->nis = $nis;
+                            $absen->tanggal = $tanggal;
+                            $absen->jammasuk = $jam;
+                            $absen->ket = "H";
+                            $absen->save();
+                        }
+                    }elseif($open->open == false){
+                        $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
+                        if($cek->count() == 1) {
+                            $jamkeluar = $cek->first()->jamkeluar;
+                            if($jamkeluar == null) {
+                                $update = absenM::where('nis', $nis)->where('tanggal', $tanggal)
+                                ->update([
+                                    'jamkeluar' => $jam,
+                                ]);
+                            }
+
+                        }else {
+                            $absen = new absenM;
+                            $absen->nis = $nis;
+                            $absen->tanggal = $tanggal;
+                            $absen->jamkeluar = $jam;
+                            $absen->ket = "A";
+                            $absen->save();
+                        }
+                    }
+
+                }
+
+
+
             }
 
         }
 
-
-
-
-        // foreach ($data as $key) {
-        //     echo $key->uid." ";
-        // }
-
-        // return response()->json([
-        //     'message' => 'Data diterima',
-        //     'uid' => $data
-        // ]);
-
     }
+
+
 
     public function krsmatkul($id)
     {
