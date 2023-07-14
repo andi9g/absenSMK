@@ -119,12 +119,15 @@ class APIC extends Controller
         if($cek == 0) {
             abort(500, 'Kunci tidak valid');
         }else {
-            return true;
+            $jsonData = $request->getContent();
+            $data = json_decode($jsonData);
+
+            return date('Y-m-d H:i:s', $data->waktu);
+
         }
 
 
-        // $jsonData = $request->getContent();
-        // $data = json_decode($jsonData);
+
 
         // foreach ($data as $key) {
         //     echo $key->uid." ";
