@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\siswaM;
+use App\Models\alatM;
 
 class APIC extends Controller
 {
@@ -108,15 +109,28 @@ class APIC extends Controller
 
     public function data(Request $request)
     {
-        $kunci = $request->header('key_post');
-        $kunci = $request->header('computerId');
+        $key_post = $request->header('key_post');
+        $computerId = $request->header('computerId');
 
-        $jsonData = $request->getContent();
-        $data = json_decode($jsonData);
+        $cek = alatM::where('computerId', $computerId)
+        ->where('key_post', $key_post)
+        ->count();
 
-        foreach ($data as $key) {
-            echo $key->uid." ";
+        if($cek == 0) {
+            return response()->json([
+                'message' => 'Kunci tidak valid',
+            ], 403);
+        }else {
+            return true;
         }
+
+
+        // $jsonData = $request->getContent();
+        // $data = json_decode($jsonData);
+
+        // foreach ($data as $key) {
+        //     echo $key->uid." ";
+        // }
 
         // return response()->json([
         //     'message' => 'Data diterima',
