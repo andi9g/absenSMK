@@ -122,7 +122,10 @@ class APIC extends Controller
             $jsonData = $request->getContent();
             $data = json_decode($jsonData);
 
-            return date('Y-m-d H:i:s', $data->waktu);
+            foreach ($data as $key) {
+                # code...
+                return date('Y-m-d H:i:s', $key->waktu);
+            }
 
         }
 
