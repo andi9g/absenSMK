@@ -142,11 +142,12 @@ class APIC extends Controller
                 ->select('siswa.nis')
                 ->where('card.uid', $key['uid']);
                 // dd($ambil->count());
-                return $ambil->count();
+
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
                     // dd($nis);
                     if($open->open == true) {
+                        return $tanggal;
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
                         if($cek == 1) {
                             $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
