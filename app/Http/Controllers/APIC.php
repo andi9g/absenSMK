@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\siswaM;
+use App\Models\master;
+use App\Models\adminM;
 use App\Models\alatM;
-use App\Models\openM;
+use App\Models\siswaM;
 use App\Models\absenM;
+use App\Models\openM;
 // use App\Models\siswaM;
 
 class APIC extends Controller
@@ -140,7 +142,7 @@ class APIC extends Controller
 
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
-                    dd($nis);
+                    // dd($nis);
                     if($open->open == true) {
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
                         if($cek == 1) {
