@@ -128,14 +128,14 @@ class APIC extends Controller
             $open = openM::first();
 
             foreach ($json as $key) {
-                $tanggal = date('Y-m-d', $key->waktu);
-                $jam = date('H:i', $key->waktu);
+                $tanggal = date('Y-m-d', $key['waktu']);
+                $jam = date('H:i', $key['waktu']);
 
                 // dd($tanggal." ".$jam);
 
                 $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
                 ->select('siswa.nis')
-                ->where('card.uid', $key->uid);
+                ->where('card.uid', $key['uid']);
 
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
