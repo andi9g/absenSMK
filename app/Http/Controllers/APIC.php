@@ -160,6 +160,7 @@ class APIC extends Controller
                                 $hasil = 'success';
                             }
                         }else if($cek == 0) {
+                            return $cek;
                             $absen = new absenM;
                             $absen->nis = $nis;
                             $absen->tanggal = $tanggal;
@@ -167,7 +168,7 @@ class APIC extends Controller
                             $absen->ket = "H";
                             $absen->save();
                             $hasil = 'success';
-                            return $absen;
+
                         }
                     }elseif($open->open == false){
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
