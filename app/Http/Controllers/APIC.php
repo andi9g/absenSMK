@@ -135,12 +135,14 @@ class APIC extends Controller
                 $tanggal = date('Y-m-d', $key['waktu']);
                 $jam = date('H:i', $key['waktu']);
 
+
                 // dd($tanggal." ".$jam);
 
                 $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
                 ->select('siswa.nis')
                 ->where('card.uid', $key['uid']);
                 // dd($ambil->count());
+                return $ambil->count();
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
                     // dd($nis);
