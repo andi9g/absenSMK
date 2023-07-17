@@ -195,13 +195,13 @@ class APIC extends Controller
 
                 }
 
-                return $hasil;
+
 
 
 
             }
 
-            return false;
+            return $hasil;
 
         }
 
