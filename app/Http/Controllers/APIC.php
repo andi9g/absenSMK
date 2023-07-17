@@ -149,7 +149,7 @@ class APIC extends Controller
                     if($open->open == true) {
 
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
-                        return $cek." benar";
+
                         if($cek == 1) {
                             $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
                             $keterangan = $data->ket;
@@ -167,7 +167,7 @@ class APIC extends Controller
                             $absen->ket = "H";
                             $absen->save();
                             $hasil = 'success';
-
+                            return $absen;
                         }
                     }elseif($open->open == false){
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
