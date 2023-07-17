@@ -136,10 +136,10 @@ class APIC extends Controller
                 $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
                 ->select('siswa.nis')
                 ->where('card.uid', $key->uid);
-                dd($key->uid);
+
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
-
+                    dd($nis);
                     if($open->open == true) {
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
                         if($cek == 1) {
