@@ -118,6 +118,7 @@ class APIC extends Controller
         ->where('key_post', $key_post)
         ->count();
 
+        $hasil = 'gagal';
         if($cek == 0) {
             abort(500, 'Kunci tidak valid');
         }else {
@@ -127,12 +128,12 @@ class APIC extends Controller
             $open = openM::first();
 
             foreach ($json as $key) {
-                $tanggal = date('Y-m-d', $key['waktu']);
-                $jam = date('H:i', $key['waktu']);
+                $tanggal = date('Y-m-d', $key->waktu);
+                $jam = date('H:i', $key->waktu);
 
                 $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
                 ->select('siswa.nis')
-                ->where('card.uid', $key['uid']);
+                ->where('card.uid', $key->uid);
 
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
@@ -146,6 +147,7 @@ class APIC extends Controller
                                 $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
                                     'ket' => 'H',
                                 ]);
+                                $hasil = 'success';
                             }
                         }else if($cek == 0) {
                             $absen = new absenM;
@@ -154,6 +156,8 @@ class APIC extends Controller
                             $absen->jammasuk = $jam;
                             $absen->ket = "H";
                             $absen->save();
+                            $hasil = 'success';
+
                         }
                     }elseif($open->open == false){
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
@@ -164,6 +168,7 @@ class APIC extends Controller
                                 ->update([
                                     'jamkeluar' => $jam,
                                 ]);
+                                $hasil = 'success';
                             }
 
                         }else {
@@ -173,12 +178,13 @@ class APIC extends Controller
                             $absen->jamkeluar = $jam;
                             $absen->ket = "A";
                             $absen->save();
+                            $hasil = 'success';
                         }
                     }
 
                 }
 
-                return true;
+                return $hasil;
 
 
 
