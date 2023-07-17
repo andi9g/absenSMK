@@ -131,7 +131,7 @@ class APIC extends Controller
                 $tanggal = date('Y-m-d', $key->waktu);
                 $jam = date('H:i', $key->waktu);
 
-                dd($tanggal." ".$jam);
+                // dd($tanggal." ".$jam);
 
                 $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
                 ->select('siswa.nis')
