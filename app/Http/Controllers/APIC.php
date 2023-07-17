@@ -166,7 +166,7 @@ class APIC extends Controller
                             $absen->ket = "H";
                             $absen->save();
                             $hasil = 'success';
-                            return $hasil;
+                            return $absen;
                         }
                     }elseif($open->open == false){
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
