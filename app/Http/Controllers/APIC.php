@@ -130,7 +130,7 @@ class APIC extends Controller
             $json = json_decode($jsonData, true);
 
             $open = openM::first();
-
+            return count($json);
             foreach ($json as $key) {
                 $tanggal = date('Y-m-d', $key['waktu']);
                 $jam = date('H:i', $key['waktu']);
