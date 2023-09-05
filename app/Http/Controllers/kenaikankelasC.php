@@ -56,7 +56,7 @@ class kenaikankelasC extends Controller
             'kelas2' => "required|numeric",
         ]);
 
-        try {
+        // try {
             $judulkelulusan = $request->judulkelulusan;
             $tahun = $request->tahun;
             $kelas = $request->kelas;
@@ -86,9 +86,9 @@ class kenaikankelasC extends Controller
             }
 
 
-        } catch (\Throwable $th) {
-            return redirect()->back()->withInput();
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->withInput();
+        // }
     }
 
     /**
