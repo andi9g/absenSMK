@@ -73,7 +73,7 @@ class kenaikankelasC extends Controller
                 $idkelulusan = $tambah->idkelulusan;
                 $siswa = siswaM::where('idkelas', $kelas)->get();
                 foreach ($siswa as $s) {
-                    dd($s->nis);
+                    dd(siswaM::where("nis", $s->nis)->count());
                     siswaM::where("nis", $s->nis)->update([
                         "idkelas" => $kelas2,
                         "idkelulusan" => $idkelulusan,
