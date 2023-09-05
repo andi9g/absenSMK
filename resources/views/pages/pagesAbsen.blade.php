@@ -51,6 +51,37 @@
           <i class="fa fa-question-circle"></i>
         </button>
 
+        <button class="badge border-0  badge-danger mb-2" type="button" data-toggle="modal" data-target="#ubahketerangan">
+            <i class="fa fa-exclamation"></i>
+        </button>
+
+        <div id="ubahketerangan" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="my-modal-title">Ubah Jam</h5>
+                        <button class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('ubahjammasuk') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <p class="text-danger">fitur ini digunakan untuk mengubah jam masuk/ keluar yang salah posisi akibat belum menekan button jam masuk/keluar sesuai jamnya</p>
+
+                            <div class="form-group">
+                                <label for="tanggal">Tanggal</label>
+                                <input id="tanggal" class="form-control" type="date" name="tanggal" value="{{$tanggal}}">
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-block">Ubah Jam masuk</button>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Modal -->
         <div class="modal fade" id="help" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

@@ -42,8 +42,8 @@ Route::middleware(['Gerbang'])->group(function () {
     Route::put('admin/edit/{id}', 'adminC@update')->name('update.admin')->middleware('GerbangSuperadmin');
     Route::delete('admin/delete/{id}', 'adminC@destroy')->name('delete.admin')->middleware('GerbangSuperadmin');
 
-    Route::get('ubahjammasuk', 'absenC@ubahjammasuk');
-    Route::get('ubahjamkeluar', 'absenC@ubahjamkeluar');
+    Route::post('ubahjammasuk', 'absenC@ubahjammasuk')->name("ubahjammasuk");
+    Route::get('ubahjamkeluar', 'absenC@ubahjamkeluar')->name("ubahjamkeluar");
 
     Route::get('desain/kartu', 'desainC@index');
     Route::put('desain/kartu/updateGambar/{idsiswa}', 'desainC@updategambar')->name('update.gambar');

@@ -129,9 +129,18 @@ class APIC extends Controller
             $jsonData = $request->getContent();
             $json = json_decode($jsonData, true);
 
-            $open = openM::first();
-            // return count($json);
+
+
             foreach ($json as $key) {
+                $open = openM::first()->open;
+                if($open == true) {
+                    $jamtutup = strtotime(date("Y-m-d H:i",strtotime(date("Y-m-d"." 14.00"))));
+                    $jamsekarang = strtotime(date("Y-m-d H:i", $key['waktu']));
+                    if($jamsekarang >= $jamtutup) {
+                        $open = false;
+                    }
+                }
+
                 $tanggal = date('Y-m-d', $key['waktu']);
                 $jam = date('H:i', $key['waktu']);
 
@@ -146,7 +155,7 @@ class APIC extends Controller
                 if($ambil->count() == 1) {
                     $nis = $ambil->first()->nis;
                     // dd($nis);
-                    if($open->open == true) {
+                    if($open == true) {
 
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
                         // return $cek;
@@ -170,7 +179,7 @@ class APIC extends Controller
                             $hasil = 'success';
 
                         }
-                    }elseif($open->open == false){
+                    }elseif($open == false) {
                         $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
                         if($cek->count() == 1) {
                             $jamkeluar = $cek->first()->jamkeluar;

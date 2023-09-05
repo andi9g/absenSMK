@@ -16,7 +16,8 @@ class absenC extends Controller
 
     public function ubahjammasuk(Request $request)
     {
-        $absen = absenM::where('tanggal', date('Y-m-d'))
+        $tanggal = $request->tanggal;
+        $absen = absenM::where('tanggal', $tanggal)
         ->where('jammasuk', null)
         ->get();
         foreach ($absen as $a) {
@@ -31,7 +32,7 @@ class absenC extends Controller
             ]);
 
         }
-        return redirect('absen')->with('success');
+        return redirect('absen')->with('toast_success', "success");
     }
 
     // public function ubahjamkeluar(Request $request)
