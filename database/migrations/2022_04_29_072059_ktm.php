@@ -24,7 +24,7 @@ class Ktm extends Migration
             $table->text('computerId')->unique();
             $table->timestamps();
         });
-        
+
         Schema::create('card', function (Blueprint $table) {
             $table->char('uid', 10)->primary();
             $table->char('nis')->unique();
@@ -39,6 +39,13 @@ class Ktm extends Migration
             $table->String('jammasuk')->nullable();
             $table->String('jamkeluar')->nullable();
             $table->enum('ket', ['H', 'I', 'S', 'A']);
+            $table->timestamps();
+        });
+
+        Schema::create('kelulusan', function (Blueprint $table) {
+            $table->bigIncrements('idkelulusan');
+            $table->String("judulkelulusan");
+            $table->String("tahun");
             $table->timestamps();
         });
 
@@ -75,7 +82,6 @@ class Ktm extends Migration
             'open' => true,
         ]);
 
-        
         Schema::create('siswa', function (Blueprint $table) {
             $table->Integer('nis')->primary();
             $table->String('namasiswa');
@@ -83,10 +89,11 @@ class Ktm extends Migration
             $table->year('tahunmasuk');
             $table->Integer('idjurusan');
             $table->Integer('idkelas');
+            $table->Integer('idkelulusan');
             $table->timestamps();
         });
 
-        
+
         Schema::create('admin', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('username')->unique();
@@ -139,10 +146,10 @@ class Ktm extends Migration
         }
 
 
-        
-        
 
-        
+
+
+
     }
 
     /**
@@ -168,6 +175,6 @@ class Ktm extends Migration
         Schema::drop('tahun_ajaran');
         Schema::drop('kelas_mhs');
 
-        
+
     }
 }

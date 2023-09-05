@@ -243,6 +243,15 @@
             </a>
           </li>
 
+          <li class="nav-item hoverku">
+            <a href="{{ url('kenaikankelas', []) }}" class="nav-link @yield('activekukenaikankelas')">
+              <i class="nav-icon fa fa-arrow-circle-up"></i>
+              <p>
+                KENAIKAN KELAS
+              </p>
+            </a>
+          </li>
+
           @endif
 
           <li class="nav-item hoverku">

@@ -45,6 +45,10 @@ Route::middleware(['Gerbang'])->group(function () {
     Route::post('ubahjammasuk', 'absenC@ubahjammasuk')->name("ubahjammasuk");
     Route::get('ubahjamkeluar', 'absenC@ubahjamkeluar')->name("ubahjamkeluar");
 
+    //kenaikan kelas
+    Route::get("kenaikankelas", "kenaikankelasC@index");
+    Route::post("kenaikankelas", "kenaikankelasC@store")->name('naikan.kelas');
+
     Route::get('desain/kartu', 'desainC@index');
     Route::put('desain/kartu/updateGambar/{idsiswa}', 'desainC@updategambar')->name('update.gambar');
 

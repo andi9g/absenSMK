@@ -151,6 +151,6 @@ class cetakC extends Controller
             'tanggaltampil' => $tanggaltampil,
         ])->setPaper('a4', 'landscape');
 
-        return $pdf->stream('laporan.pdf');
+        return $pdf->stream('laporan_absensi_'.$j->namajurusan."(".$dkelas.").pdf");
     }
 }
