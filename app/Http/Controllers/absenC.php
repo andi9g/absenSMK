@@ -32,7 +32,7 @@ class absenC extends Controller
             ]);
 
         }
-        return redirect('absen')->with('toast_success', "success");
+        return redirect('absen?tanggal='.$tanggal)->with('toast_success', "success");
     }
 
     // public function ubahjamkeluar(Request $request)
