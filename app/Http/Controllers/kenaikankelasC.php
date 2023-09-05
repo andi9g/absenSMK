@@ -64,8 +64,11 @@ class kenaikankelasC extends Controller
 
             $cek = siswaM::where('idkelas', $kelas)->count();
             if($cek>0) {
-                $siswa = siswaM::where("idkelulusan", 1)->count();
-                dd($siswa);
+                $siswa = siswaM::where("idkelulusan", 1)->update([
+                    "idkelas" => $kelas2,
+                    "idkelulusan" => null,
+                ]);
+                // dd($siswa);
 
                 // $tambah = new kelulusanM;
                 // $tambah->judulkelulusan = $judulkelulusan;
