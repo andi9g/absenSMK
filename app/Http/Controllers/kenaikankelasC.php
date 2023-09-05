@@ -64,24 +64,17 @@ class kenaikankelasC extends Controller
 
             $cek = siswaM::where('idkelas', $kelas)->count();
             if($cek>0) {
-                kelulusanM::truncate();
-                // dd($siswa);
-
-                // $tambah = new kelulusanM;
-                // $tambah->judulkelulusan = $judulkelulusan;
-                // $tambah->tahun = $tahun;
-                // $tambah->save();
+                $tambah = new kelulusanM;
+                $tambah->judulkelulusan = $judulkelulusan;
+                $tambah->tahun = $tahun;
+                $tambah->save();
 
 
-                // $idkelulusan = $tambah->idkelulusan;
-                // $siswa = siswaM::where('idkelas', $kelas)->get();
-                // foreach ($siswa as $s) {
-                //     dd(siswaM::where("nis", ((string)$s->nis))->count());
-                //     siswaM::where("nis", $s->nis)->update([
-                //         "idkelas" => $kelas2,
-                //         "idkelulusan" => $idkelulusan,
-                //     ]);
-                // }
+                $idkelulusan = $tambah->idkelulusan;
+                $siswa = siswaM::where('idkelas', $kelas)->update([
+                    "idkelas" => $kelas2,
+                    "idkelulusan" => $idkelulusan,
+                ]);
 
                 return redirect()->back()->with("toast_success","selamat kelas berhasil ditingkatkan")->withInput();
             }else {
