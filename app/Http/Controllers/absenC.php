@@ -112,8 +112,10 @@ class absenC extends Controller
             ->orWhere('jurusan.idjurusan', 'like', $jurusan."%");
         })
 
+
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
+        $absen = absenM::where("tanggal", $tangal)->count();
         dd($absen);
 
         $absen->appends($request->only(['limits', 'keyword', 'jurusan', 'kelas', 'tanggal']));
