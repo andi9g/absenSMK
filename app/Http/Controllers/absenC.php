@@ -108,7 +108,7 @@ class absenC extends Controller
             $query->where('siswa.nis', 'like', "$keyword%")
             ->orWhere('siswa.namasiswa', 'like', "%$keyword%");
         })
-        ->whereDate('absen.tanggal', $tanggal)
+        ->where('absen.tanggal', $tanggal)
         ->where('kelas.idkelas', 'like', $kelas."%")
         ->where('jurusan.idjurusan', 'like', $jurusan."%")
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
