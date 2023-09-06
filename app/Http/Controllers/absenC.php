@@ -104,7 +104,7 @@ class absenC extends Controller
         $absen = absenM::rightJoin('siswa', 'siswa.nis', 'absen.nis')
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
-        ->where(function ($query) use ($keyword){
+        ->where(function ($query) use ($keyword, $kelas, $jurusan){
             $query->where('siswa.nis', 'like', "$keyword%")
             ->orWhere('siswa.namasiswa', 'like', "%$keyword%")
             ->orWhere('kelas.idkelas', 'like', $kelas."%")
