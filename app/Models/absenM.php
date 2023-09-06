@@ -9,4 +9,5 @@ class absenM extends Model
 {
     use HasFactory;
     protected $table = 'absen';
+    protected $primaryKey = 'idabsen';
 }

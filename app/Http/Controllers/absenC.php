@@ -104,13 +104,14 @@ class absenC extends Controller
         $absen = absenM::rightJoin('siswa', 'siswa.nis', 'absen.nis')
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        ->where('absen.tanggal',"2023-09-06")
         ->where(function ($query) use ($keyword, $kelas, $jurusan){
             $query->where('siswa.nis', 'like', "$keyword%")
             ->orWhere('siswa.namasiswa', 'like', "%$keyword%")
             ->orWhere('kelas.idkelas', 'like', $kelas."%")
             ->orWhere('jurusan.idjurusan', 'like', $jurusan."%");
         })
-        ->where('absen.tanggal',"2023-09-06")
+
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
         dd($absen);
