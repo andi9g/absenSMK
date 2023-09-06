@@ -143,7 +143,7 @@
                                         ->where('tanggal', $tanggal);
                                     @endphp
                                         @if ($cek->count() === 0)
-                                        <option value="{{$item->nis}}">{{$item->nis}}-{{ucwords($item->namasiswa)}} -[ {{$item->namajurusan}} ]</option>
+                                        <option value="{{sprintf("%010s", $item->nis)}}">{{sprintf("%010s", $item->nis)}}-{{ucwords($item->namasiswa)}} -[ {{$item->namajurusan}} ]</option>
 
                                         @endif
                                     @endforeach
