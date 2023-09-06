@@ -100,7 +100,7 @@ class absenC extends Controller
         ->where('jurusan.idjurusan', 'like', $jurusan."%")
         ->count();
 
-        dd($tanggal);
+        // dd($tanggal);
         $absen = absenM::rightJoin('siswa', 'siswa.nis', 'absen.nis')
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
@@ -113,6 +113,7 @@ class absenC extends Controller
         ->where('jurusan.idjurusan', 'like', $jurusan."%")
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
+        dd($absen);
 
         $absen->appends($request->only(['limits', 'keyword', 'jurusan', 'kelas', 'tanggal']));
 
