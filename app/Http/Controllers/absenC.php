@@ -113,9 +113,9 @@ class absenC extends Controller
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
 
-
-        $coba = 0012312332323;
-        $coba2 = "$coba";
+        $ambil = siswaM::where('nis', "0058672023")->first();
+        $coba = $ambil->nis;
+        $coba2 = "$ambil->nis";
         dd($coba." ".$coba2);
 
         $absen->appends($request->only(['limits', 'keyword', 'jurusan', 'kelas', 'tanggal']));
