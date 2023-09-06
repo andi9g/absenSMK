@@ -105,12 +105,12 @@ class absenC extends Controller
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->where('absen.tanggal',"2023-09-06")
-        ->where(function ($query) use ($keyword, $kelas, $jurusan){
-            $query->where('siswa.nis', 'like', "$keyword%")
-            ->orWhere('siswa.namasiswa', 'like', "%$keyword%")
-            ->orWhere('kelas.idkelas', 'like', $kelas."%")
-            ->orWhere('jurusan.idjurusan', 'like', $jurusan."%");
-        })
+        // ->where(function ($query) use ($keyword, $kelas, $jurusan){
+        //     $query->where('siswa.nis', 'like', "$keyword%")
+        //     ->orWhere('siswa.namasiswa', 'like', "%$keyword%")
+        //     ->orWhere('kelas.idkelas', 'like', $kelas."%")
+        //     ->orWhere('jurusan.idjurusan', 'like', $jurusan."%");
+        // })
 
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
