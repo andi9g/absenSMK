@@ -110,7 +110,7 @@ class absenC extends Controller
             ->orWhere('kelas.idkelas', 'like', $kelas."%")
             ->orWhere('jurusan.idjurusan', 'like', $jurusan."%");
         })
-        ->where('absen.tanggal',"like",$tanggal."%")
+        ->where('absen.tanggal',"2023-09-06")
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
         dd($absen);
