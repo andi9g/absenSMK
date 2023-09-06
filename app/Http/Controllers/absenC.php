@@ -114,7 +114,7 @@ class absenC extends Controller
         ->paginate(10);
 
         $ambil = siswaM::where('nis', "0058672023")->first();
-        $coba = (string)$ambil->nis;
+        $coba = sprintf("%011s", $ambil->nis);
         $coba2 = "$ambil->nis";
         dd($coba." ".$coba2);
 
