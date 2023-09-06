@@ -163,7 +163,6 @@ class absenC extends Controller
 
         try{
             $siswa = $request->siswa;
-            dd($siswa);
             $keterangan = $request->keterangan;
             $tanggal = date('Y-m-d', strtotime($tanggal));
             $jammasuk = date('H:i');
