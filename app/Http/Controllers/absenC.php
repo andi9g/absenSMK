@@ -101,7 +101,7 @@ class absenC extends Controller
         ->count();
 
         // dd($tanggal);
-        $absen = absenM::rightJoin('siswa', 'siswa.nis', 'absen.nis')
+        $absen = absenM::join('siswa', 'siswa.nis', 'absen.nis')
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->where('absen.tanggal',"2023-09-06")
@@ -115,7 +115,7 @@ class absenC extends Controller
 
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
-        $absen = absenM::where("tanggal", $tanggal)->count();
+        // $absen = absenM::where("tanggal", $tanggal)->count();
         dd($absen);
 
         $absen->appends($request->only(['limits', 'keyword', 'jurusan', 'kelas', 'tanggal']));
