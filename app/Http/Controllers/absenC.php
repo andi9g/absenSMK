@@ -113,8 +113,9 @@ class absenC extends Controller
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
 
+
         $coba = 0012312332323;
-        $coba2 = (string)0012312332323;
+        $coba2 = "$coba";
         dd($coba." ".$coba2);
 
         $absen->appends($request->only(['limits', 'keyword', 'jurusan', 'kelas', 'tanggal']));
