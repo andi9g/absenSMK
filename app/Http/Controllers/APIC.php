@@ -153,7 +153,7 @@ class APIC extends Controller
                 // dd($ambil->count());
 
                 if($ambil->count() == 1) {
-                    $nis = $ambil->first()->nis;
+                    $nis = (string)$ambil->first()->nis;
                     // dd($nis);
                     if($open == true) {
 
