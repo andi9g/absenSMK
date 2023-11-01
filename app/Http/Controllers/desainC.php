@@ -30,13 +30,10 @@ class desainC extends Controller
             ->orWhere('jurusan.jurusan', 'like', "$keyword%")
             ->orWhere('kelas.kelas', 'like', "$keyword%");
         })
-        ->orderBy('kelas.kelas', 'asc')
-        ->orderBy('jurusan.jurusan', 'desc')
-        ->orderBy('siswa.nama', 'asc')
+        ->orderBy("siswa.idsiswa", "desc")
         ->where('kelas.idkelas','like', $pkelas."%")
         ->where('jurusan.idjurusan','like', $pjurusan."%")
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
-        ->orderBy("siswa.idsiswa", "desc")
         ->paginate(15);
 
         $nisnData = $siswaInduk->select('nisn','nama')->get();
