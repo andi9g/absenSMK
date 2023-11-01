@@ -57,7 +57,7 @@ class SiswaImport implements ToModel, WithHeadingRow
 
         if($siswa == 0) {
             // dd(ucwords(strtolower($row['nama'])));
-            new siswaM([
+            siswaM::create([
                 'nis' => sprintf("%010s", $row['nisn']),
                 'namasiswa'  => ucwords(strtolower($row['nama'])),
                 'jk' => $row['jk'],
