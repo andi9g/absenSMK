@@ -52,7 +52,8 @@ class SiswaImport implements ToModel, WithHeadingRow
         
         $idkelas = kelasM::where("namakelas", $rombel[0])->first()->idkelas;
         
-        
+        $idsiswa = siswaInduk::count();
+        dd($idsiswa);
 
         if($siswa == 0) {
             // dd(ucwords(strtolower($row['nama'])));
@@ -68,6 +69,7 @@ class SiswaImport implements ToModel, WithHeadingRow
             ]);
 
             return new siswaInduk([
+                "idsiswa" => $idsiswa,
                 'nama'  => ucwords(strtolower($row['nama'])),
                 'jk' => $row['jk'],
                 'nisn' => sprintf("%010s", $row['nisn']),
