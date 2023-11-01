@@ -28,7 +28,7 @@ class umumC extends Controller
 
         $siswa = siswaM::join('kelas', 'kelas.idkelas', 'siswa.idkelas')
         ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
-        ->where("siswa.namasiswa", 'like', "%$keyword%")
+        ->where("siswa.nama", 'like', "%$keyword%")
         ->where("jurusan.idjurusan", 'like', "$jurusan%")
         ->where("kelas.idkelas", 'like', "$kelas%")
         ->select('siswa.*', 'kelas.namakelas','jurusan.namajurusan')
