@@ -36,7 +36,7 @@ class desainC extends Controller
         ->where('kelas.idkelas','like', $pkelas."%")
         ->where('jurusan.idjurusan','like', $pjurusan."%")
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
-        // ->orderBy()
+        ->orderBy("siswa.idsiswa", "desc")
         ->paginate(15);
 
         $nisnData = $siswaInduk->select('nisn','nama')->get();
