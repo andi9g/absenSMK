@@ -11,5 +11,4 @@ class jurusanM extends Model
     protected $table = 'jurusan';
     protected $primaryKey = 'idjurusan';
     protected $guarded = [];
-    protected $connection = 'mysql2';
 }
