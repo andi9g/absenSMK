@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\siswaInduk;
 use App\Models\siswaM;
 use App\Models\kelasM;
 use App\Models\jurusanM;
@@ -36,7 +37,7 @@ class SiswaImport implements ToModel, WithHeadingRow
         $alamat = str_replace(", ,", ", ", $alamat);
         $alamat = str_replace(", , ,", ", ", $alamat);
 
-        $siswa = siswaM::where("nama", ucwords(strtolower($row['nama'])))->where("tanggallahir", $row['tanggallahir'])->count();
+        $siswa = siswaM::where("nis", sprintf("%010s", $row['nisn']))->count();
 
         // dd($siswa);
 
@@ -47,24 +48,36 @@ class SiswaImport implements ToModel, WithHeadingRow
         }else {
             $juru = $rombel[1];
         }
-        $idjurusan = jurusanM::where("jurusan", $juru)->first()->idjurusan;
-        $idkelas = kelasM::where("kelas", $rombel[0])->first()->idkelas;
+        $idjurusan = jurusanM::where("namajurusan", $juru)->first()->idjurusan;
+        
+        $idkelas = kelasM::where("namakelas", $rombel[0])->first()->idkelas;
         
         
 
         if($siswa == 0) {
             // dd(ucwords(strtolower($row['nama'])));
             return new siswaM([
+                'nis' => sprintf("%010s", $row['nisn']),
                 'namasiswa'  => ucwords(strtolower($row['nama'])),
                 'jk' => $row['jk'],
-                'nisn' => sprintf("%010s", $row['nisn']),
-                'tempatlahir' => $row['tempatlahir'],
-                'tanggallahir' => $row['tanggallahir'],
-                'agama' => $row['agama'],
-                'alamat' => $row['alamat'],
+                'tahunmasuk' => date('Y'),
                 "idjurusan" => $idjurusan,
                 "idkelas" => $idkelas,
+                "idkelulusan" => 2,
+                "tanggallahir" => $row['tanggallahir'],
             ]);
+
+            // return new siswaInduk([
+            //     'nama'  => ucwords(strtolower($row['nama'])),
+            //     'jk' => $row['jk'],
+            //     'nisn' => sprintf("%010s", $row['nisn']),
+            //     'tempatlahir' => $row['tempatlahir'],
+            //     'tanggallahir' => $row['tanggallahir'],
+            //     'agama' => $row['agama'],
+            //     'alamat' => $row['alamat'],
+            //     "idjurusan" => $idjurusan,
+            //     "idkelas" => $idkelas,
+            // ]);
         }
     }
 }

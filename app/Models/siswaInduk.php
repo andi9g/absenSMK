@@ -9,5 +9,7 @@ class siswaInduk extends Model
 {
     use HasFactory;
     protected $table = 'siswa';
+    protected $primaryKey = 'idsiswa';
+    protected $guarded = [];
     protected $connection = 'mysql2';
 }

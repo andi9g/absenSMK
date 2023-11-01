@@ -26,7 +26,7 @@
                         @foreach ($datajurusan as $j)
                             <option value="{{$j->idjurusan}}" class="text-capitalize" @if ($j->idjurusan == $jurusan)
                                 selected
-                            @endif>{{$j->jurusan}}</option>
+                            @endif>{{$j->namajurusan}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,7 +38,7 @@
                             @foreach ($datakelas as $j)
                                 <option value="{{$j->idkelas}}" class="text-capitalize" @if ($j->idkelas == $kelas)
                                     selected
-                                @endif>{{$j->kelas}}</option>
+                                @endif>{{$j->namakelas}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -83,9 +83,9 @@
                         @foreach ($siswa as $item)
                             <tr>
                                 <td nowrap width="5px">{{$loop->iteration + $siswa->firstItem() - 1 }}</td>
-                                <td>{{ucwords(strtolower($item->nama))}}</td>
+                                <td>{{ucwords(strtolower($item->namasiswa))}}</td>
                                 <td nowrap class="text-center">
-                                    {{$item->kelas."-".$item->jurusan}}
+                                    {{$item->namakelas."-".$item->namajurusan}}
                                 </td>
                                 <td>
                                     @php

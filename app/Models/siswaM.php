@@ -9,8 +9,9 @@ class siswaM extends Model
 {
     use HasFactory;
     protected $table = 'siswa';
-    protected $primaryKey = 'idsiswa';
+    protected $primaryKey = 'nis';
     protected $guarded = [];
+    protected $connection = "mysql";
 
     public function jurusan()
     {

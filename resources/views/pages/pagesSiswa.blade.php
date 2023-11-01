@@ -21,7 +21,7 @@
                     @foreach ($jurusan as $item)
                         <option value="{{ $item->idjurusan }}" @if (empty($_GET['jurusan'])?"":$_GET['jurusan'] == $item->idjurusan)
                             selected
-                        @endif>{{ $item->jurusan }}</option>
+                        @endif>{{ $item->namajurusan }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -32,7 +32,7 @@
                     @foreach ($kelas as $item)
                         <option value="{{ $item->idkelas }}" @if (empty($_GET['kelas'])?"":$_GET['kelas'] == $item->idkelas)
                             selected
-                        @endif>{{ $item->kelas }}</option>
+                        @endif>{{ $item->namakelas }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -210,12 +210,12 @@
         @foreach ($tampil as $item)
             <tr>
               <td class="text-center" width="10px">{{ $loop->iteration + $tampil->firstItem() - 1 }}</td>
-              <td>{{$item->nisn}}</td>
-              <td>{{$item->nama}}</td>
+              <td>{{$item->nis}}</td>
+              <td>{{$item->namasiswa}}</td>
               <td>{{$item->jk}}</td>
               {{-- <td>{{$item->tahunmasuk}}</td> --}}
-              <td>{{$item->kelas}}</td>
-              <td>{{$item->jurusan}}</td>
+              <td>{{$item->namakelas}}</td>
+              <td>{{$item->namajurusan}}</td>
               <td>
                 <!-- Button trigger modal -->
                 <button type="button" class="badge badge-primary border-0 d-inline" data-toggle="modal" data-target="#editdata{{$item->nis}}">
@@ -242,7 +242,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form action="{{ route('siswa.destroy', [$item->idsiswa]) }}" method="post">
+                        <form action="{{ route('siswa.destroy', [$item->nis]) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary">Hapus</button>
@@ -264,7 +264,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
-                  <form action="{{ route('siswa.update', [$item->idsiswa]) }}" method="post">
+                  <form action="{{ route('siswa.update', [$item->nis]) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
