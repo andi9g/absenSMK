@@ -31,6 +31,7 @@ class desainC extends Controller
             ->orWhere('kelas.kelas', 'like', "$keyword%");
         })
         ->orderBy("siswa.idsiswa", "desc")
+        ->where("kelas.idkelas", "!=", 4)
         ->where('kelas.idkelas','like', $pkelas."%")
         ->where('jurusan.idjurusan','like', $pjurusan."%")
         ->select('siswa.*', 'kelas.kelas', 'jurusan.jurusan', 'jurusan.namajurusan')
@@ -66,6 +67,23 @@ class desainC extends Controller
             'jml' => $jml,
         ]);
     }
+
+    public function kenaikan(Request $request)
+    {
+        $request->validate([
+            'kelas' => 'required',
+            'jurusan' => 'required',
+        ]);
+
+        $kelas = $request->kelas;
+        $jurusan = $request->jurusan;
+
+        $siswa = siswaInduk::where('idkelas', $kelas)->where("idjurusan", $jurusan)->update([
+            'idkelas' => ($kelas + 1),
+        ]);
+        return redirect()->back()->with("success", "data telah berhasil naik kelas")->withInput();
+    }
+
 
     /**
      * Show the form for creating a new resource.

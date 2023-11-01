@@ -125,7 +125,7 @@ Route::middleware(['Gerbang'])->group(function () {
     
     Route::middleware(['GerbangSuperadmin'])->group(function () {
         Route::post("import/siswa", "import@import")->name("import.siswa");
-        
+        Route::post("kenaikankelas/kenaikan", "desainC@kenaikan")->name("kenaikan.kelas");
     });
 
 

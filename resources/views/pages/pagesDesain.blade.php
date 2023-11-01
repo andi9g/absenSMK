@@ -40,6 +40,55 @@
           <i class="fa fa-print"></i> NISN
         </button>
 
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#naikankelas">Kenaikan Kelas</button>
+
+        <div id="naikankelas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="my-modal-title">Ubah kenaikan kelas</h5>
+                        <button class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('kenaikan.kelas', []) }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="my-input">Kelas</label>
+                                <select name="kelas" id="" class="form-control" >
+                                    <option value="">Keseluruhan</option>
+                                    @foreach ($kelas as $item)
+                                        <option value="{{$item->idkelas}}" @if ($item->idkelas == $pkelas)
+                                            selected
+                                        @endif>{{$item->kelas}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="my-input">Jurusan</label>
+                                <select name="jurusan" id="" class="form-control">
+                                    <option value="">Keseluruhan</option>
+                                    @foreach ($jurusan as $item)
+                                        <option value="{{$item->idjurusan}}" @if ($item->idjurusan == $pjurusan)
+                                            selected
+                                        @endif>{{$item->jurusan}}</option>
+                                    @endforeach
+                                </select>
+                                
+                            </div>
+    
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Proses</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="nisncetak" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
             <div class="modal-dialog" role="document">
