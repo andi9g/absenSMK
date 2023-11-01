@@ -53,7 +53,7 @@ class SiswaImport implements ToModel, WithHeadingRow
         $idkelas = kelasM::where("namakelas", $rombel[0])->first()->idkelas;
         
         $idsiswa = siswaInduk::orderBy("idsiswa", "desc")->first()->idsiswa;
-        dd($idsiswa + 1);
+        $idsiswa = $idsiswa + 1;
 
         if($siswa == 0) {
             // dd(ucwords(strtolower($row['nama'])));
