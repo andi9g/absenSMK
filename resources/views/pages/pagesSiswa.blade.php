@@ -210,7 +210,7 @@
         @foreach ($tampil as $item)
             <tr>
               <td class="text-center" width="10px">{{ $loop->iteration + $tampil->firstItem() - 1 }}</td>
-              <td>{{$item->nis}}</td>
+              <td>{{sprintf("%010s", $item->nis)}}</td>
               <td>{{$item->namasiswa}}</td>
               <td>{{$item->jk}}</td>
               {{-- <td>{{$item->tahunmasuk}}</td> --}}
