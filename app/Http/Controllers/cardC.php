@@ -29,6 +29,7 @@ class cardC extends Controller
             $query->where('siswa.nis','like', "$keyword%")
                   ->orWhere('siswa.namasiswa','like', "%$keyword%");
         })
+        ->orderBy("siswa.idkelas", "desc")
         ->where('jurusan.idjurusan','like', "$jurusan%")
         ->where('kelas.idkelas','like', "$kelas%")
         ->where('siswa.tahunmasuk','like', "$tahun%")
