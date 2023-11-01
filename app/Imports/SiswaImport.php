@@ -67,17 +67,17 @@ class SiswaImport implements ToModel, WithHeadingRow
                 "tanggallahir" => $row['tanggallahir'],
             ]);
 
-            // return new siswaInduk([
-            //     'nama'  => ucwords(strtolower($row['nama'])),
-            //     'jk' => $row['jk'],
-            //     'nisn' => sprintf("%010s", $row['nisn']),
-            //     'tempatlahir' => $row['tempatlahir'],
-            //     'tanggallahir' => $row['tanggallahir'],
-            //     'agama' => $row['agama'],
-            //     'alamat' => $row['alamat'],
-            //     "idjurusan" => $idjurusan,
-            //     "idkelas" => $idkelas,
-            // ]);
+            return new siswaInduk([
+                'nama'  => ucwords(strtolower($row['nama'])),
+                'jk' => $row['jk'],
+                'nisn' => sprintf("%010s", $row['nisn']),
+                'tempatlahir' => $row['tempatlahir'],
+                'tanggallahir' => $row['tanggallahir'],
+                'agama' => $row['agama'],
+                'alamat' => $row['alamat'],
+                "idjurusan" => $idjurusan,
+                "idkelas" => $idkelas,
+            ]);
         }
     }
 }
