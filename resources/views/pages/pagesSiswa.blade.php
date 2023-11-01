@@ -61,7 +61,7 @@
         <form action="{{ url()->current() }}" class="form-inline justify-content-end">
             <div class="input-group mb-3">
                 <input type="text" hidden value="{{$tahun}}" name="tahun">
-                <input type="text" class="form-control text-uppercase" value="{{empty($_GET['keyword'])?'':$_GET['keyword']}}" name="keyword" placeholder="Masukan nim" aria-describedby="button-addon2">
+                <input type="text" class="form-control text-uppercase" value="{{empty($_GET['keyword'])?'':$_GET['keyword']}}" name="keyword" placeholder="Masukan nama" aria-describedby="button-addon2">
                 <div class="input-group-append">
                   <button class="btn btn-outline-success" type="submit" id="button-addon2">Cari</button>
                 </div>
