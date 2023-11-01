@@ -214,12 +214,21 @@
 
 
           @if (Session::get('posisi')=='superadmin')
+         
           <li class="nav-item hoverku">
             <hr>
             <a href="{{ url('/alat', []) }}" class="nav-link @yield('activekuMaster')">
               <i class="nav-icon fa fa-home"></i>
               <p>
                 RUANGAN (RFID)
+              </p>
+            </a>
+          </li>
+           <li class="nav-item hoverku">
+            <a href="{{ url('/siswa', []) }}" class="nav-link @yield('activekuSiswa')">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Data Siswa
               </p>
             </a>
           </li>

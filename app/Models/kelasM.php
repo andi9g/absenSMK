@@ -9,4 +9,7 @@ class kelasM extends Model
 {
     use HasFactory;
     protected $table = 'kelas';
+    protected $primaryKey = 'idkelas';
+    protected $guarded = [];
+    protected $connection = 'mysql2';
 }

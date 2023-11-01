@@ -9,4 +9,7 @@ class jurusanM extends Model
 {
     use HasFactory;
     protected $table = 'jurusan';
+    protected $primaryKey = 'idjurusan';
+    protected $guarded = [];
+    protected $connection = 'mysql2';
 }

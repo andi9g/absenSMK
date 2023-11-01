@@ -21,7 +21,7 @@
                     @foreach ($jurusan as $item)
                         <option value="{{ $item->idjurusan }}" @if (empty($_GET['jurusan'])?"":$_GET['jurusan'] == $item->idjurusan)
                             selected
-                        @endif>{{ $item->namajurusan }}</option>
+                        @endif>{{ $item->jurusan }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -32,7 +32,7 @@
                     @foreach ($kelas as $item)
                         <option value="{{ $item->idkelas }}" @if (empty($_GET['kelas'])?"":$_GET['kelas'] == $item->idkelas)
                             selected
-                        @endif>{{ $item->namakelas }}</option>
+                        @endif>{{ $item->kelas }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -75,6 +75,35 @@
       <button type="button" class="btn btn-primary btn-xs btn-lg mb-2" data-toggle="modal" data-target="#tambahSiswa">
         <i class="fa fa-user-plus"></i> Tambah Siswa
       </button>
+
+      <button class="btn btn-secondary btn-xs btn-lg mb-2" type="button" data-toggle="modal" data-target="#importdatasiswa">
+        <i class="fa fa-upload"></i> Import Data Siswa
+      </button>
+
+      <div id="importdatasiswa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="my-modal-title">Import Data</h5>
+              <button class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{{ route('import.siswa', []) }}" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="importdata">Import Data</label>
+                  <input id="importdata" class="form-control" type="file" name="import">
+                </div>
+              </div>
+              <div class="modal-footer text-right">
+                <button type="submit" class="btn btn-success">Import</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
       <!-- Modal -->
       <div class="modal fade" id="tambahSiswa" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -181,12 +210,12 @@
         @foreach ($tampil as $item)
             <tr>
               <td class="text-center" width="10px">{{ $loop->iteration + $tampil->firstItem() - 1 }}</td>
-              <td>{{$item->nis}}</td>
-              <td>{{$item->namasiswa}}</td>
+              <td>{{$item->nisn}}</td>
+              <td>{{$item->nama}}</td>
               <td>{{$item->jk}}</td>
               {{-- <td>{{$item->tahunmasuk}}</td> --}}
-              <td>{{$item->namakelas}}</td>
-              <td>{{$item->namajurusan}}</td>
+              <td>{{$item->kelas}}</td>
+              <td>{{$item->jurusan}}</td>
               <td>
                 <!-- Button trigger modal -->
                 <button type="button" class="badge badge-primary border-0 d-inline" data-toggle="modal" data-target="#editdata{{$item->nis}}">
@@ -213,7 +242,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form action="{{ route('siswa.destroy', [$item->nis]) }}" method="post">
+                        <form action="{{ route('siswa.destroy', [$item->idsiswa]) }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary">Hapus</button>
@@ -235,7 +264,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
-                  <form action="{{ route('siswa.update', [$item->nis]) }}" method="post">
+                  <form action="{{ route('siswa.update', [$item->idsiswa]) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">

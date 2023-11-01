@@ -59,20 +59,21 @@ class siswaC extends Controller
         $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk;
         $keyword = empty($request->keyword)?"":$request->keyword;
 
-        $kelas_ = kelasM::select('idkelas',"namakelas")->orderBy('idkelas', 'asc')->get();
-        $jurusan_ = jurusanM::select('idjurusan',"namajurusan")->orderBy('idjurusan', 'asc')->get();
+        $kelas_ = kelasM::select('idkelas',"kelas")->orderBy('idkelas', 'asc')->get();
+        $jurusan_ = jurusanM::select('idjurusan',"jurusan")->orderBy('idjurusan', 'asc')->get();
         $tahun_ = siswaM::select('tahunmasuk')->orderBy('tahunmasuk','asc')->groupBy('tahunmasuk')->get();
 
-        $tampil = siswaM::join('kelas','kelas.idkelas','=','siswa.idkelas')
-        ->join('jurusan', 'jurusan.idjurusan','=','siswa.idjurusan')
-        ->select('siswa.*','kelas.namakelas','kelas.idkelas','jurusan.namajurusan','jurusan.idjurusan')
-        ->where('siswa.nis','like', "$keyword%")
-        ->where('jurusan.idjurusan','like', "$jurusan%")
-        ->where('kelas.idkelas','like', "$kelas%")
-        ->where('siswa.tahunmasuk','like', "$tahun%")
+        $tampil = siswaM::join('kelas', 'kelas.idkelas', '=', 'siswa.idkelas')
+        ->join('jurusan', 'jurusan.idjurusan', '=', 'siswa.idjurusan')
+        ->select('siswa.*', 'kelas.kelas', 'kelas.idkelas', 'jurusan.jurusan', 'jurusan.idjurusan')
+        // ->where('siswa.nis', 'like', "$keyword%")
+        ->where('kelas.idkelas', "like", "$kelas%")
+        ->where('jurusan.idjurusan', 'like', "$jurusan%")
+        // ->orWhere('siswa.tahunmasuk', 'like', "$tahun%")
+        ->with(['jurusan', 'kelas'])
         ->paginate(15);
 
-        $tampil->appends($request->only('keyword', 'tahun', 'jurusan', 'kelas', 'limit'));
+        $tampil->appends($request->only(['keyword', 'tahun', 'jurusan', 'kelas', 'limit']));
 
         return view('pages.pagesSiswa',[
             'Dtahun' => $tahun_,
