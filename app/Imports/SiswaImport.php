@@ -69,7 +69,7 @@ class SiswaImport implements ToModel, WithHeadingRow
             ]);
 
             return new siswaInduk([
-                "idsiswa" => $idsiswa,
+                // "idsiswa" => $idsiswa,
                 'nama'  => ucwords(strtolower($row['nama'])),
                 'jk' => $row['jk'],
                 'nisn' => sprintf("%010s", $row['nisn']),
