@@ -100,13 +100,14 @@ class absenC extends Controller
         ->where('jurusan.idjurusan', 'like', $jurusan."%")
         ->count();
 
-        $absen = absenM::join('siswa', 'siswa.nis', 'absen.nis')
+        $absen = absenM::leftJoin('siswa', 'siswa.nis', 'absen.nis')
         ->join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
         ->join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        // ->with(["jurusan", "kelas"])
         ->whereDate('absen.tanggal', $tanggal)
-        ->orWhere('siswa.namasiswa', 'like', "%$keyword%")
-        ->orWhere('kelas.idkelas', 'like', $kelas."%")
-        ->orWhere('jurusan.idjurusan', 'like', $jurusan."%")
+        ->where('siswa.namasiswa', 'like', "%$keyword%")
+        ->where('kelas.idkelas', 'like', $kelas."%")
+        ->where('jurusan.idjurusan', 'like', $jurusan."%")
         ->select('absen.*', 'siswa.namasiswa', 'kelas.namakelas', 'jurusan.namajurusan')
         ->paginate(10);
 

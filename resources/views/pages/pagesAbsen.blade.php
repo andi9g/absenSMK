@@ -327,6 +327,7 @@
                         </td>
                     </tr>
 
+                    
                     {{-- Hapus absen --}}
                     <div class="modal fade" id="hapusabsen{{$item->idabsen}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
