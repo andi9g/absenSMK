@@ -124,7 +124,7 @@ class APIC extends Controller
 
         $hasil = 'gagal';
         if($cek == 0) {
-            abort(500, 'Kunci tidak valid');
+            // abort(500, 'Kunci tidak valid');
         }else {
             $jsonData = $request->getContent();
             $json = json_decode($jsonData, true);
