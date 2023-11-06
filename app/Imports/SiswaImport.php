@@ -37,8 +37,9 @@ class SiswaImport implements ToModel, WithHeadingRow
         $alamat = str_replace(", ,", ", ", $alamat);
         $alamat = str_replace(", , ,", ", ", $alamat);
 
-        $siswa = siswaM::where("nis", sprintf("%010s", $row['nisn']))->count();
+        $siswa = siswaM::where("nis", sprintf("%010s", $row['nisn']));
 
+        // dd($alamat);
         // dd($siswa);
 
         $rombel = explode(" ",$row["rombel"]);
@@ -55,7 +56,7 @@ class SiswaImport implements ToModel, WithHeadingRow
         $idsiswa = siswaInduk::orderBy("idsiswa", "desc")->first()->idsiswa;
         $idsiswa = $idsiswa + 1;
 
-        if($siswa == 0) {
+        if($siswa->count() == 0) {
             // dd(ucwords(strtolower($row['nama'])));
             siswaM::create([
                 'nis' => sprintf("%010s", $row['nisn']),
@@ -76,10 +77,21 @@ class SiswaImport implements ToModel, WithHeadingRow
                 'tempatlahir' => $row['tempatlahir'],
                 'tanggallahir' => $row['tanggallahir'],
                 'agama' => $row['agama'],
-                'alamat' => $row['alamat'],
+                'alamat' => $alamat,
                 "idjurusan" => $idjurusan,
                 "idkelas" => $idkelas,
             ]);
+        }else {
+            $induk = siswaInduk::where("nisn", sprintf("%010s", $row['nisn']))->first();
+            if($induk) {
+                
+                $ex = $induk->update([
+                    'alamat' => $alamat,
+                ]);
+
+                // return $ex;
+                
+            }
         }
     }
 }
