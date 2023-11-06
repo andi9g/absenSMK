@@ -27,7 +27,7 @@
             height: <?php echo $h;?>px;
             margin: 15px;
             display: inline-block;
-            background: url('gambar/kartu/kartu2.jpg');
+            background: url('gambar/kartu/kartu5.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             border-radius: 30px;
@@ -86,7 +86,7 @@
                 </td>
                 <td valign="top" style="padding: 30px" class="identitas">
                     <br><br><br>
-                    <table style="font-size: 6pt;border-collapse: collapse;@if($item->jurusan=='DPIB' || $item->jurusan=='ATPH')
+                    <table style="font-size: 6pt;border-collapse: collapse;@if($item->jurusan=='DPIB' || $item->jurusan=='ATPH' || $item->jurusan=='TJKT')
                         margin-top:22px
                     @else
                         margin-top:45px
