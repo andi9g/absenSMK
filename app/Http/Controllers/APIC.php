@@ -122,99 +122,99 @@ class APIC extends Controller
         ->where('key_post', $key_post)
         ->count();
 
-        $hasil = 'gagal';
-        if($cek == 0) {
-            abort(500, 'Kunci tidak valid');
-        }else {
-            $jsonData = $request->getContent();
-            $json = json_decode($jsonData, true);
+        // $hasil = 'gagal';
+        // if($cek == 0) {
+        //     abort(500, 'Kunci tidak valid');
+        // }else {
+        //     $jsonData = $request->getContent();
+        //     $json = json_decode($jsonData, true);
 
 
 
-            foreach ($json as $key) {
-                $open = openM::first()->open;
-                if($open == true) {
-                    $jamtutup = strtotime(date("Y-m-d H:i",strtotime(date("Y-m-d"." 14.00"))));
-                    $jamsekarang = strtotime(date("Y-m-d H:i", $key['waktu']));
-                    if($jamsekarang >= $jamtutup) {
-                        $open = false;
-                    }
-                }
+        //     foreach ($json as $key) {
+        //         $open = openM::first()->open;
+        //         if($open == true) {
+        //             $jamtutup = strtotime(date("Y-m-d H:i",strtotime(date("Y-m-d"." 14.00"))));
+        //             $jamsekarang = strtotime(date("Y-m-d H:i", $key['waktu']));
+        //             if($jamsekarang >= $jamtutup) {
+        //                 $open = false;
+        //             }
+        //         }
 
-                $tanggal = date('Y-m-d', $key['waktu']);
-                $jam = date('H:i', $key['waktu']);
-
-
-                // dd($tanggal." ".$jam);
-
-                $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
-                ->select('siswa.nis')
-                ->where('card.uid', $key['uid']);
-                // dd($ambil->count());
-
-                if($ambil->count() == 1) {
-                    $nis = sprintf("%010s", $ambil->first()->nis);
-                    // dd($nis);
-                    if($open == true) {
-
-                        $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
-                        // return $cek;
-                        if($cek == 1) {
-                            $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
-                            $keterangan = $data->ket;
-                            if($keterangan == 'I'){
-                                $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
-                                    'ket' => 'H',
-                                ]);
-                                $hasil = 'success';
-                            }
-                        }else if($cek == 0) {
-
-                            $absen = new absenM;
-                            $absen->nis = $nis;
-                            $absen->tanggal = $tanggal;
-                            $absen->jammasuk = $jam;
-                            $absen->ket = "H";
-                            $absen->save();
-                            $hasil = 'success';
-
-                        }
-                    }elseif($open == false) {
-                        $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
-                        if($cek->count() == 1) {
-                            $jamkeluar = $cek->first()->jamkeluar;
-                            if($jamkeluar == null) {
-                                $update = absenM::where('nis', $nis)->where('tanggal', $tanggal)
-                                ->update([
-                                    'jamkeluar' => $jam,
-                                ]);
-                                $hasil = 'success';
-                            }
-
-                        }else {
-                            $absen = new absenM;
-                            $absen->nis = $nis;
-                            $absen->tanggal = $tanggal;
-                            $absen->jamkeluar = $jam;
-                            $absen->ket = "A";
-                            $absen->save();
-                            $hasil = 'success';
-                        }
-                    }
-
-                }
+        //         $tanggal = date('Y-m-d', $key['waktu']);
+        //         $jam = date('H:i', $key['waktu']);
 
 
+        //         // dd($tanggal." ".$jam);
+
+        //         $ambil = siswaM::join('card', 'card.nis', 'siswa.nis')
+        //         ->select('siswa.nis')
+        //         ->where('card.uid', $key['uid']);
+        //         // dd($ambil->count());
+
+        //         if($ambil->count() == 1) {
+        //             $nis = sprintf("%010s", $ambil->first()->nis);
+        //             // dd($nis);
+        //             if($open == true) {
+
+        //                 $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal)->count();
+        //                 // return $cek;
+        //                 if($cek == 1) {
+        //                     $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->first();
+        //                     $keterangan = $data->ket;
+        //                     if($keterangan == 'I'){
+        //                         $data = absenM::where('nis', $nis)->where('tanggal', $tanggal)->update([
+        //                             'ket' => 'H',
+        //                         ]);
+        //                         $hasil = 'success';
+        //                     }
+        //                 }else if($cek == 0) {
+
+        //                     $absen = new absenM;
+        //                     $absen->nis = $nis;
+        //                     $absen->tanggal = $tanggal;
+        //                     $absen->jammasuk = $jam;
+        //                     $absen->ket = "H";
+        //                     $absen->save();
+        //                     $hasil = 'success';
+
+        //                 }
+        //             }elseif($open == false) {
+        //                 $cek = absenM::where('nis', $nis)->where('tanggal', $tanggal);
+        //                 if($cek->count() == 1) {
+        //                     $jamkeluar = $cek->first()->jamkeluar;
+        //                     if($jamkeluar == null) {
+        //                         $update = absenM::where('nis', $nis)->where('tanggal', $tanggal)
+        //                         ->update([
+        //                             'jamkeluar' => $jam,
+        //                         ]);
+        //                         $hasil = 'success';
+        //                     }
+
+        //                 }else {
+        //                     $absen = new absenM;
+        //                     $absen->nis = $nis;
+        //                     $absen->tanggal = $tanggal;
+        //                     $absen->jamkeluar = $jam;
+        //                     $absen->ket = "A";
+        //                     $absen->save();
+        //                     $hasil = 'success';
+        //                 }
+        //             }
+
+        //         }
 
 
 
-            }
+
+
+        //     }
 
 
 
-        }
+        // }
 
-        return $hasil;
+        return $cek;
 
     }
 
