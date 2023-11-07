@@ -115,14 +115,14 @@ class APIC extends Controller
 
     public function data(Request $request)
     {
-        $key_post = $request->header('key_post');
-        $computerId = $request->header('computerId');
+        // $key_post = $request->header('key_post');
+        // $computerId = $request->header('computerId');
 
-        $cek = alatM::where('computerId', $computerId)
-        ->where('key_post', $key_post)
-        ->count();
+        // $cek = alatM::where('computerId', $computerId)
+        // ->where('key_post', $key_post)
+        // ->count();
 
-        // $hasil = 'gagal';
+        $hasil = 'gagal';
         // if($cek == 0) {
         //     abort(500, 'Kunci tidak valid');
         // }else {
@@ -214,7 +214,7 @@ class APIC extends Controller
 
         // }
 
-        return $cek;
+        return $hasil;
 
     }
 
