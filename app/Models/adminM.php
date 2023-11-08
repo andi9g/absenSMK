@@ -9,4 +9,6 @@ class adminM extends Model
 {
     use HasFactory;
     protected $table = 'admin';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
 }
