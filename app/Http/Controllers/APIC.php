@@ -118,16 +118,21 @@ class APIC extends Controller
     {
         $key_post = $request->header('key_post');
         $computerId = $request->header('computerId');
-        $value = $request->value;
+        
 
-        $pesan = $value;
+        
         $cek = adminM::where('computerId', $computerId)
         ->where('key_post', $key_post);
         if($cek->count() > 0) {
+            $jsonData = $request->getContent();
+            $json = json_decode($jsonData, true);
+            $value = $json["uid"];
+            $pesan = $value;
+
             $cek->first()->update([
                 'value' => $value,
             ]);
-            $pesan = "berhasil";
+            // $pesan = "berhasil";
         }
 
         return $pesan;
