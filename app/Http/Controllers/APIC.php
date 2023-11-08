@@ -122,7 +122,7 @@ class APIC extends Controller
         ->where('key_post', $key_post)
         ->count();
 
-        $hasil = 'gagal';
+        $hasil = 'data tidak ditemukan';
         if($cek == 0) {
             abort(500, 'Kunci tidak valid');
         }else {
