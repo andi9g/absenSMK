@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post("admin/data/iot", "APIC@admin");
+Route::post("api/admin/data/iot", "APIC@admin");
