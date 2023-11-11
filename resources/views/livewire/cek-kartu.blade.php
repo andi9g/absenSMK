@@ -9,7 +9,7 @@
               <table class="table table-striped table-bordered table-hover">
                   <tr>
                     <th>UID</th>
-                    <td>{{ $uid }}</td>
+                    <td>{{ (String)$uid }}</td>
                   </tr>
                   <tr>
                     <th>NIS</th>
