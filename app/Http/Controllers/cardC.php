@@ -106,13 +106,6 @@ class cardC extends Controller
 
     public function cardCek(Request $request)
     {
-
-        session_start();
-        $Write= "";
-        $url = public_path().'/masterUID/'.$_SESSION['perangkat'].'.php';
-        file_put_contents($url,$Write);
-
-
         return view('pages.pagesCekCard');
     }
 

@@ -127,13 +127,12 @@ class APIC extends Controller
             $jsonData = $request->getContent();
             $json = json_decode($jsonData, true);
             $value = $json["uid"];
-            $waktu = date("Y-m-d H:i:s", $json["waktu"]);
             $pesan = $value;
 
             $cek->first()->update([
                 'value' => $value,
             ]);
-            $pesan = $waktu." Berhasil";
+            // $pesan = "berhasil";
         }
 
         return $pesan;

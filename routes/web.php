@@ -71,7 +71,7 @@ Route::middleware(['Gerbang'])->group(function () {
 
     //cekcard
     Route::get('card/cek/', 'cardC@cardCek');
-    Route::post('card/cek/', 'cardC@cardData')->name('cek.card');
+    // Route::post('card/cek/', 'cardC@cardData')->name('cek.card');
 
     //kelolah Alat
     Route::get('/alat', 'alatC@alat');

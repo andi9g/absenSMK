@@ -11,4 +11,9 @@ class cardM extends Model
     protected $table = 'card';
     protected $primaryKey = 'uid';
     protected $guarded = [];
+
+    public function siswa()
+    {
+        return $this->hasOne(siswaM::class, 'nis', 'nis');
+    }
 }
