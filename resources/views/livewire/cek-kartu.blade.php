@@ -9,19 +9,19 @@
               <table class="table table-striped table-bordered table-hover">
                   <tr>
                     <th>UID</th>
-                    <td>{{ empty($uid)?"-":$uid }}</td>
+                    <td>{{ $uid }}</td>
                   </tr>
                   <tr>
                     <th>NIS</th>
-                    <td>{{ empty($nis)?"-":$nis }}</td>
+                    <td>{{ $nis }}</td>
                   </tr>
                   <tr>
                     <th>NAMA</th>
-                    <td>{{ empty($namasiswa)?"-":$namasiswa }}</td>
+                    <td>{{ $namasiswa }}</td>
                   </tr>
                   <tr>
                     <th>KET</th>
-                    <td class="text-bold">{{ strtoupper(empty($ket)?"-":"".$ket) }}</td>
+                    <td class="text-bold">{{ $ket }}</td>
                   </tr>
               </table>
             </div>

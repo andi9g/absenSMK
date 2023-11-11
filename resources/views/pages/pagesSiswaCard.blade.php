@@ -227,21 +227,21 @@
             <tbody>
                 @foreach ($siswa as $item)
                 <tr>
-                    <td class="text-center text-bold">{{ sprintf("%010s", $item->nis) }}</td>
+                    <td class="text-center text-bold">{{ sprintf("%010s", sprintf('%010s',$item->nis)) }}</td>
                     <td>{{ $item->namasiswa }}</td>
                     <td>{{ ($item->jk=="L")?"Laki-Laki":"Perempuan" }}</td>
                     <td>{{ strtoupper($item->namakelas) }}</td>
                     <td class="text-center">{{ strtoupper($item->tahunmasuk) }}</td>
                     <td>
-                        <button type="button" onclick="kirim_nis_{{$item->nis}}(this)" value="{{$item->nis}}" data-toggle="modal" class="btn btn-xs  btn-success btn-block" data-target="#tambahCard"><i class="fa fa-id-card"></i> Card</button>
+                        <button type="button" onclick="kirim_nis_{{sprintf('%010s',$item->nis)}}(this)" value="{{sprintf('%010s',$item->nis)}}" data-toggle="modal" class="btn btn-xs  btn-success btn-block" data-target="#tambahCard"><i class="fa fa-id-card"></i> Card</button>
                     </td>
                     <td class="text-center">
                         @php
-                            $cek = DB::table('card')->where('nis', $item->nis)->count();
+                            $cek = DB::table('card')->where('nis', sprintf('%010s',sprintf('%010s',$item->nis)))->count();
                         @endphp
                         @if ($cek === 1)
                             <p class="badge badge-success my-0">Terdaftar</p>
-                            <form action="{{ route('reset.card', [$item->nis]) }}" method="post" class="d-inline my-0">
+                            <form action="{{ route('reset.card', [sprintf('%010s',$item->nis)]) }}" method="post" class="d-inline my-0">
                                 @csrf
                                 <button type="submit" onclick="return confirm('Yakin ingin direset?')" class="badge badge-secondary border-0">
                                     reset
@@ -256,7 +256,7 @@
                     
 
                 <script>
-                    function kirim_nis_{{$item->nis}}(nis) {
+                    function kirim_nis_{{sprintf('%010s',$item->nis)}}(nis) {
                         document.getElementById('id_nis').value=nis.value;
                     }
                 </script>
