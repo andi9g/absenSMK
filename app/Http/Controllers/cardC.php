@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\siswaM;
 use App\Models\jurusanM;
+use App\Models\adminM;
 use App\Models\kelasM;
 use App\Models\cardM;
 use Illuminate\Http\Request;
@@ -37,10 +38,14 @@ class cardC extends Controller
 
         $tampil->appends($request->only('keyword', 'tahun', 'jurusan', 'kelas', 'limit'));
 
-        session_start();
-        $Write= "";
-        $url = public_path().'/masterUID/'.$_SESSION['perangkat'].'.php';
-        file_put_contents($url,$Write);
+        $iduser = $request->session()->get('id');
+        adminM::where("id", $iduser)->update([
+            "value" => "",
+        ]);
+        // session_start();
+        // $Write= "";
+        // $url = public_path().'/masterUID/'.$_SESSION['perangkat'].'.php';
+        // file_put_contents($url,$Write);
 
 
         return view('pages.pagesSiswaCard', [

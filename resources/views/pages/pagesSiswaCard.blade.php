@@ -119,7 +119,7 @@
                     <small><i class="text-success">silahkan scan CARD RFID</i></small>
                     <div class="form-group">
                         <label for="">UID Scan</label>
-                        <textarea name="uid" id="UID" rows="1" class="form-control text-center justify-content-center align-content-center pl-1" style="outline:none;background: rgba(158, 158, 158, 0.329);border:1px solid rgba(146, 146, 146, 0.596);border-radius:5px;resize:none;text-align:center;width: fit-content" placeholder="" readonly></textarea>
+                        @livewire("cek-card")
                     </div>
 
                     <div class="form-group">
@@ -227,7 +227,7 @@
             <tbody>
                 @foreach ($siswa as $item)
                 <tr>
-                    <td class="text-center text-bold">{{ $item->nis }}</td>
+                    <td class="text-center text-bold">{{ sprintf("%010s", $item->nis) }}</td>
                     <td>{{ $item->namasiswa }}</td>
                     <td>{{ ($item->jk=="L")?"Laki-Laki":"Perempuan" }}</td>
                     <td>{{ strtoupper($item->namakelas) }}</td>
@@ -278,18 +278,5 @@
 @section('myScript')
 @include('layout.layoutJS')
 
-
-<script>
-
-$(document).ready(function(){
-    let i = 350;
-    $("#UID").load("{{ url('/masterUID/'.$_SESSION['perangkat'].'.php') }}");
-    $("#UID2").load("{{ url('/masterUID/'.$_SESSION['perangkat'].'.php') }}");
-    setInterval(function() {
-        $("#UID").load("{{ url('/masterUID/'.$_SESSION['perangkat'].'.php') }}");        
-        $("#UID2").load("{{ url('/masterUID/'.$_SESSION['perangkat'].'.php') }}");        
-    }, i);
-});
-</script> 
 
 @endsection

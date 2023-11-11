@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Sistem Informasi Absensi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  @livewireStyles
   <link rel="stylesheet" href="{{ url('resource_admin/plugins/fontawesome-free/css/all.min.css', []) }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="stylesheet" href="{{ url('resource_admin/dist/css/adminlte.min.css', []) }}">
@@ -13,6 +14,7 @@
   @yield('atas')
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   @stack('start')
+  
 
 
 </head>
@@ -338,6 +340,7 @@
 
 @yield('myScript')
 @yield('bawah')
+@livewireScripts
 
 </body>
 </html>
