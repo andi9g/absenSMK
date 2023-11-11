@@ -232,13 +232,19 @@
                     <td>{{ ($item->jk=="L")?"Laki-Laki":"Perempuan" }}</td>
                     <td>{{ strtoupper($item->namakelas) }}</td>
                     <td class="text-center">{{ strtoupper($item->tahunmasuk) }}</td>
+                    @php
+                        $cek = DB::table('card')->where('nis', sprintf('%010s',sprintf('%010s',$item->nis)))->count();
+                    @endphp
                     <td>
+                    @if ($cek === 1)
                         <button type="button" onclick="kirim_nis_{{sprintf('%010s',$item->nis)}}(this)" value="{{sprintf('%010s',$item->nis)}}" data-toggle="modal" class="btn btn-xs  btn-success btn-block" data-target="#tambahCard"><i class="fa fa-id-card"></i> Card</button>
+                    @else
+                        <p class="text-primary">Terdaftar</p>
+
+                    @endif
                     </td>
                     <td class="text-center">
-                        @php
-                            $cek = DB::table('card')->where('nis', sprintf('%010s',sprintf('%010s',$item->nis)))->count();
-                        @endphp
+                        
                         @if ($cek === 1)
                             <p class="badge badge-success my-0">Terdaftar</p>
                             <form action="{{ route('reset.card', [sprintf('%010s',$item->nis)]) }}" method="post" class="d-inline my-0">
