@@ -9,4 +9,6 @@ class cardM extends Model
 {
     use HasFactory;
     protected $table = 'card';
+    protected $primaryKey = 'uid';
+    protected $guarded = [];
 }

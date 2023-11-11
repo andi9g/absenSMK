@@ -71,6 +71,7 @@ class cardC extends Controller
             $uid = $request->uid;
             $nis = $request->nis;
 
+            dd($uid);
             $mhs = siswaM::where('nis', $nis)->count();
 
             $cekCard = cardM::join('siswa','siswa.nis','=', 'card.nis')
@@ -88,6 +89,8 @@ class cardC extends Controller
                 $tambah->nis = $nis; 
                 $tambah->ket = 'siswa'; 
                 $tambah->save();
+
+
                 if ($tambah) {
                     return redirect()->back()->with('toast_success', 'CARD Berhasil ditambahkan');
                 }
