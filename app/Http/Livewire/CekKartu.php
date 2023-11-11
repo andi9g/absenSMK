@@ -18,7 +18,7 @@ class CekKartu extends Component
 
         $card = cardM::where('uid', $admin->value)->first();
        
-        $this->uid = (String) (empty($card->uid)?"tidak ditemukan":$card->uid);
+        $this->uid = $admin->value;
         $this->nis = empty($card->nis)?"tidak ditemukan":sprintf("%010s", $card->nis);
         $this->namasiswa = empty($card->siswa->namasiswa)?"tidak ditemukan":$card->siswa->namasiswa;
         $this->ket = empty($card->ket)?"tidak ditemukan":$card->ket;
