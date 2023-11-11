@@ -106,6 +106,12 @@ class cardC extends Controller
 
     public function cardCek(Request $request)
     {
+
+        $iduser = $request->session()->get('id');
+        adminM::where("id", $iduser)->update([
+            "value" => "",
+        ]);
+
         return view('pages.pagesCekCard');
     }
 
