@@ -71,7 +71,7 @@ class cardC extends Controller
             $uid = $request->uid;
             $nis = $request->nis;
 
-            dd($uid);
+            // dd($uid);
             $mhs = siswaM::where('nis', $nis)->count();
 
             $cekCard = cardM::join('siswa','siswa.nis','=', 'card.nis')
@@ -79,6 +79,7 @@ class cardC extends Controller
                         ->where('card.uid', $uid);
 
             if($cekCard->count() == 1) {
+                dd("berhasil");
                 $ambil = $cekCard->first();
                 return redirect()->back()->with('warning', 'Kartu telah terdaftar sebagai '.$ambil->nis." - ".$ambil->namasiswa." | Angkatan : ".$ambil->tahunmasuk)->withInput();
             }
