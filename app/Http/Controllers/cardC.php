@@ -69,7 +69,7 @@ class cardC extends Controller
 
         try {
             $uid = $request->uid;
-            $nis = $request->nis;
+            $nis = sprintf("%010s", $request->nis);
 
             // dd($uid);
             $mhs = siswaM::where('nis', $nis)->count();
