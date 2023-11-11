@@ -236,7 +236,7 @@
                         $cek = DB::table('card')->where('nis', sprintf('%010s',sprintf('%010s',$item->nis)))->count();
                     @endphp
                     <td>
-                    @if ($cek === 1)
+                    @if ($cek === 0)
                         <button type="button" onclick="kirim_nis_{{sprintf('%010s',$item->nis)}}(this)" value="{{sprintf('%010s',$item->nis)}}" data-toggle="modal" class="btn btn-xs  btn-success btn-block" data-target="#tambahCard"><i class="fa fa-id-card"></i> Card</button>
                     @else
                         <p class="text-primary">Terdaftar</p>
