@@ -23,7 +23,7 @@
         </a>
     </div>
     <div class="col-md-6 text-right d-inline pb-2">
-        <h4 class="text-bold d-inline"> @if ($open->open == true)
+        {{-- <h4 class="text-bold d-inline"> @if ($open->open == true)
             JAM MASUK :
             @else
             JAM KELUAR :
@@ -36,7 +36,7 @@
                 <i class="fa fa-exchange"></i>
                 MASUK/KELUAR
             </button>
-        </form>
+        </form> --}}
     </div>
 </div>
 <div class="row">
