@@ -18,11 +18,12 @@
 @section('content')
 <div class="row" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
     <div class="col-md-6">
+        
+    </div>
+    <div class="col-md-6 text-right d-inline pb-2">
         <a href="{{ url('/absen', []) }}" class="btn btn-secondary">
             <i class="fa fa-refresh"></i> Refresh
         </a>
-    </div>
-    <div class="col-md-6 text-right d-inline pb-2">
         {{-- <h4 class="text-bold d-inline"> @if ($open->open == true)
             JAM MASUK :
             @else
