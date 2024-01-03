@@ -16,4 +16,9 @@ class cardM extends Model
     {
         return $this->hasOne(siswaM::class, 'nis', 'nis');
     }
+
+    // public function admin()
+    // {
+    //     return $this->hasOne(adminM::class, 'nis', 'nis');
+    // }
 }

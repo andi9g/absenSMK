@@ -74,7 +74,7 @@ class cetakC extends Controller
         $dkelas = [];
         foreach ($jur as $j) {
 
-            $kel = kelasM::where('idkelas', 'like', "$kelas%")->orderBy('namakelas', 'ASC')->get();
+            $kel = kelasM::where('idkelas', 'like', "$kelas%")->where("namakelas", "!=", "lulus")->orderBy('namakelas', 'ASC')->get();
 
             $dkelas = [];
             foreach ($kel as $k) {
