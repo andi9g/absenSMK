@@ -65,7 +65,7 @@
                                     @endforeach
                                 </select>
                             </div>
-    
+
                             <div class="form-group">
                                 <label for="my-input">Jurusan</label>
                                 <select name="jurusan" id="" class="form-control">
@@ -76,9 +76,9 @@
                                         @endif>{{$item->jurusan}}</option>
                                     @endforeach
                                 </select>
-                                
+
                             </div>
-    
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -198,7 +198,7 @@
                             <font class="text-danger">Tidak Tersedia</font>
                             @endif
                         </td>
-                        <td>
+                        <td nowrap>
                             <!-- Button trigger modal -->
                             <button type="button" class="badge badge-primary border-0 py-1" data-toggle="modal" data-target="#tambahgambar{{$item->idsiswa}}">
                               <i class="fa fa-image"></i> Tambar Gambar
@@ -207,6 +207,8 @@
                             <a target="_blank" href="{{ route('cetak.satuan', [$item->nisn]) }}" class="badge badge-danger border-0 py-1">
                                 <i class="fa fa-print"></i> Kartu Ujian
                             </a>
+
+                            <a href="{{ route('download.gambar.siswa', [$item->idsiswa]) }}" class="badge badge-secondary border-0 py-1">Cetak</a>
                         </td>
                     </tr>
 

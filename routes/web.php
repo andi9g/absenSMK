@@ -122,10 +122,14 @@ Route::middleware(['Gerbang'])->group(function () {
     // Route::get('mahasiswa/krs/detail/{id_krs}', 'krsC@detail');
 
 
-    
+
     Route::middleware(['GerbangSuperadmin'])->group(function () {
         Route::post("import/siswa", "import@import")->name("import.siswa");
         Route::post("kenaikankelas/kenaikan", "desainC@kenaikan")->name("kenaikan.kelas");
+
+
+        //cetak kartu
+        Route::get("download/{idsiswa}/gambarsiswa", "cardC@downloadgambarsiswa")->name("download.gambar.siswa");
     });
 
 

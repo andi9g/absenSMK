@@ -20,8 +20,8 @@ class Ktm extends Migration
             $table->bigIncrements('idalat');
             $table->String('namaalat')->unique();
             $table->String('perangkat');
-            $table->text('key_post')->unique();
-            $table->text('computerId')->unique();
+            $table->longText('key_post');
+            $table->longText('computerId');
             $table->timestamps();
         });
 

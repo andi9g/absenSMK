@@ -8,16 +8,17 @@ use App\Models\adminM;
 use App\Models\kelasM;
 use App\Models\cardM;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class cardC extends Controller
 {
 
     public function cardSiswa(Request $request)
     {
-        $jurusan = empty($request->jurusan)?"":$request->jurusan; 
-        $kelas = empty($request->kelas)?"":$request->kelas; 
-        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk; 
-        $keyword = empty($request->keyword)?"":$request->keyword; 
+        $jurusan = empty($request->jurusan)?"":$request->jurusan;
+        $kelas = empty($request->kelas)?"":$request->kelas;
+        $tahun = empty($request->tahunmasuk)?"":$request->tahunmasuk;
+        $keyword = empty($request->keyword)?"":$request->keyword;
 
         $kelas_ = kelasM::select('idkelas',"namakelas")->orderBy('idkelas', 'asc')->get();
         $jurusan_ = jurusanM::select('idjurusan',"namajurusan")->orderBy('idjurusan', 'asc')->get();
@@ -59,7 +60,7 @@ class cardC extends Controller
     }
 
     public function proses(Request $request)
-    {           
+    {
 
         $request->validate([
             'uid' => 'required',
@@ -85,9 +86,9 @@ class cardC extends Controller
 
             if($mhs === 1) {
                 $tambah = new cardM;
-                $tambah->uid = $uid; 
-                $tambah->nis = $nis; 
-                $tambah->ket = 'siswa'; 
+                $tambah->uid = $uid;
+                $tambah->nis = $nis;
+                $tambah->ket = 'siswa';
                 $tambah->save();
 
 
@@ -97,12 +98,40 @@ class cardC extends Controller
             }else {
                 return redirect()->back()->with('toast_error', 'Terjadi kesalahan');
             }
-            
-            
+
+
         } catch (\Throwable $th) {
             return redirect()->back()->with('toast_error', 'Terjadi kesalahan');
         }
     }
+
+    public function downloadgambarsiswa(Request $request, $idsiswa)
+    {
+        // Path to the image in the public directory
+        $siswa = siswaM::where("idsiswa",$idsiswa)->first();
+        $filename = empty($siswa->gambar)?"noimage.png":$siswa->gambar;
+        $filePath = public_path('gambar/siswa/' . $filename);
+
+        // Custom name for the downloaded file
+        if(empty($siswa->gambar)) {
+            $customName = $siswa->nisn.".png";
+        }else {
+            $customName = $siswa->nisn.".jpg";
+
+        }
+
+        if (file_exists($filePath)) {
+            // Return the file as a download response
+            return Response::download($filePath, $customName);
+        } else {
+            // Handle file not found scenario
+            $filePath = public_path('gambar/siswa/' . "noimage.png");
+            $customName = $siswa->nisn.".png";
+            return Response::download($filePath, $customName);
+        }
+
+    }
+
 
     public function cardCek(Request $request)
     {
@@ -152,14 +181,14 @@ class cardC extends Controller
             $uid = $request->uid;
 
             $tambah = new cardM;
-            $tambah->uid = $uid; 
-            $tambah->nim = $uid; 
-            $tambah->ket = 'master'; 
+            $tambah->uid = $uid;
+            $tambah->nim = $uid;
+            $tambah->ket = 'master';
             $tambah->save();
             if ($tambah) {
                 return redirect()->back()->with('toast_success', 'Master berhasil ditambahkan');
             }
-        
+
         // }catch(\Throwable $th){
         //     return redirect('/mahasiswa/card')->with('toast_error', 'Terjadi kesalahan');
         // }
