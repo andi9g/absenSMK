@@ -151,7 +151,7 @@ class APIC extends Controller
 
     public function data(Request $request)
     {
-        $key_post = $request->header('key_post');
+        $key_post = $request->header('key');
         $computerId = $request->header('computerId');
 
         $cek = alatM::where('computerId', $computerId)
