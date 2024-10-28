@@ -22,7 +22,7 @@ Route::get('ads.txt', function(){
 
 //post kartu
 Route::get('/', 'umumC@root');
-Route::post('/api/data/iot', 'APIC@data');
+
 
 //login and logout
 Route::get('logout', 'aksesC@logout');
