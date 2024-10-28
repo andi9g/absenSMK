@@ -8,6 +8,7 @@ use App\Models\adminM;
 use App\Models\alatM;
 use App\Models\siswaM;
 use App\Models\absenM;
+use App\Models\cardM;
 use App\Models\openM;
 use Hash;
 // use App\Models\siswaM;
@@ -116,23 +117,32 @@ class APIC extends Controller
 
     public function admin(Request $request)
     {
-        $key_post = $request->header('key_post');
+        $key_post = $request->header('key');
         $computerId = $request->header('computerId');
-        
 
-        
+
+
         $cek = adminM::where('computerId', $computerId)
         ->where('key_post', $key_post);
+        $pesan = "error";
+        // return $key;
         if($cek->count() > 0) {
             $jsonData = $request->getContent();
             $json = json_decode($jsonData, true);
-            $value = $json["uid"];
-            $pesan = $value;
+            $value = $json[0]["uuid"];
+            // $pesan = $value;
 
             $cek->first()->update([
                 'value' => $value,
             ]);
-            // $pesan = "berhasil";
+
+
+            $cek = cardM::where("uid", $value)->count();
+            if($cek>0) {
+                $pesan = "Data Ditemukan";
+            }else {
+                $pesan = "Tidak Terdaftar";
+            }
         }
 
         return $pesan;
