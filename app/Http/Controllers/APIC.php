@@ -159,7 +159,7 @@ class APIC extends Controller
         ->count();
 
         // return $cek;
-        $hasil = 'error';
+        $hasil = 'Cancel';
         if($cek == 0) {
             abort(500, 'Kunci tidak valid');
         }else {
@@ -170,7 +170,6 @@ class APIC extends Controller
 
             foreach ($json as $key) {
                 $open = openM::first()->open;
-                $hasil = date("Y-m-d H:i:s", $key["waktu"]);
                 if($open == true) {
                     $jamtutup = strtotime(date("Y-m-d H:i",strtotime(date("Y-m-d"." 14.00"))));
                     $jamsekarang = strtotime(date("Y-m-d H:i", $key['waktu']));
