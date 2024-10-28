@@ -139,7 +139,7 @@ class APIC extends Controller
 
             $cek = cardM::where("uid", $value)->count();
             if($cek>0) {
-                $pesan = "Data Ditemukan";
+                $pesan = "Telah Terdaftar";
             }else {
                 $pesan = "Tidak Terdaftar";
             }
