@@ -30,7 +30,7 @@ class desainC extends Controller
             ->orWhere('jurusan.jurusan', 'like', "$keyword%")
             ->orWhere('kelas.kelas', 'like', "$keyword%");
         })
-        ->orderBy("siswa.namasiswa", "asc")
+        ->orderBy("siswa.nama", "asc")
         ->where("kelas.idkelas", "!=", 4)
         ->where('kelas.idkelas','like', $pkelas."%")
         ->where('jurusan.idjurusan','like', $pjurusan."%")
