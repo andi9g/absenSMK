@@ -129,10 +129,10 @@ class APIC extends Controller
         if($cek->count() > 0) {
             $jsonData = $request->getContent();
             $json = json_decode($jsonData, true);
-
+            $value = $json[0]["uuid"];
             // $pesan = $value;
 
-            return $json;
+            return $value;
 
             // $cek->first()->update([
             //     'value' => $value,
