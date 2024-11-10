@@ -132,19 +132,19 @@ class APIC extends Controller
             $value = $json[0]["uuid"];
             // $pesan = $value;
 
-            return $value;
+            // return $value;
 
-            // $cek->first()->update([
-            //     'value' => $value,
-            // ]);
+            $cek->first()->update([
+                'value' => $value,
+            ]);
 
 
-            // $cek = cardM::where("uid", $value)->count();
-            // if($cek>0) {
-            //     $pesan = "Telah Terdaftar";
-            // }else {
-            //     $pesan = "Tidak Terdaftar";
-            // }
+            $cek = cardM::where("uid", $value)->count();
+            if($cek>0) {
+                $pesan = "Telah Terdaftar";
+            }else {
+                $pesan = "Tidak Terdaftar";
+            }
         }
 
         // return $pesan;
