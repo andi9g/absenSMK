@@ -117,35 +117,35 @@ class APIC extends Controller
 
     public function admin(Request $request)
     {
-        $key_post = $request->header('key');
-        $computerId = $request->header('computerId');
+        // $key_post = $request->header('key');
+        // $computerId = $request->header('computerId');
 
 
 
-        $cek = adminM::where('computerId', $computerId)
-        ->where('key_post', $key_post);
-        $pesan = "error";
-        // return $key;
-        if($cek->count() > 0) {
-            $jsonData = $request->getContent();
-            $json = json_decode($jsonData, true);
-            $value = $json[0]["uuid"];
-            // $pesan = $value;
+        // $cek = adminM::where('computerId', $computerId)
+        // ->where('key_post', $key_post);
+        // $pesan = "error";
+        // // return $key;
+        // if($cek->count() > 0) {
+        //     $jsonData = $request->getContent();
+        //     $json = json_decode($jsonData, true);
+        //     $value = $json[0]["uuid"];
+        //     // $pesan = $value;
 
-            $cek->first()->update([
-                'value' => $value,
-            ]);
+        //     $cek->first()->update([
+        //         'value' => $value,
+        //     ]);
 
 
-            $cek = cardM::where("uid", $value)->count();
-            if($cek>0) {
-                $pesan = "Telah Terdaftar";
-            }else {
-                $pesan = "Tidak Terdaftar";
-            }
-        }
+        //     $cek = cardM::where("uid", $value)->count();
+        //     if($cek>0) {
+        //         $pesan = "Telah Terdaftar";
+        //     }else {
+        //         $pesan = "Tidak Terdaftar";
+        //     }
+        // }
 
-        return $pesan;
+        // return $pesan;
     }
 
 
