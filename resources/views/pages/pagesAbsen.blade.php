@@ -18,7 +18,7 @@
 @section('content')
 <div class="row" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
     <div class="col-md-6">
-        
+
     </div>
     <div class="col-md-6 text-right d-inline pb-2">
         <a href="{{ url('/absen', []) }}" class="btn btn-secondary">
@@ -144,7 +144,7 @@
                                         ->where('tanggal', $tanggal);
                                     @endphp
                                         @if ($cek->count() === 0)
-                                        <option value="{{sprintf("%010s", $item->nis)}}">{{sprintf("%010s", $item->nis)}}-{{ucwords($item->namasiswa)}} -[ {{$item->namajurusan}} ]</option>
+                                        <option value="{{sprintf("%010s", $item->nis)}}">{{sprintf("%010s", $item->nis)}}-{{ucwords($item->namasiswa)}} -[ {{$item->jurusan->namajurusan}} ]</option>
 
                                         @endif
                                     @endforeach
@@ -328,7 +328,7 @@
                         </td>
                     </tr>
 
-                    
+
                     {{-- Hapus absen --}}
                     <div class="modal fade" id="hapusabsen{{$item->idabsen}}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                         <div class="modal-dialog" role="document">

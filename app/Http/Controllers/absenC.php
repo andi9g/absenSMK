@@ -74,9 +74,8 @@ class absenC extends Controller
 
         $pengaturan = pengaturanM::first();
         // dd($pengaturan->keterlambatan);
-        $siswa = siswaM::join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
-        ->where("idkelas", "!=", 4)
-        ->select('siswa.namasiswa', 'siswa.nis', 'jurusan.namajurusan')
+        $siswa = siswaM::
+        where("idkelas", "!=", 4)
         ->get();
         // dd($siswa);
         $jumlahSiswa = siswaM::join('jurusan', 'siswa.idjurusan', 'jurusan.idjurusan')
