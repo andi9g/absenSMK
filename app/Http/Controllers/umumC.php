@@ -51,7 +51,7 @@ class umumC extends Controller
             })
             ->whereHas("kelas", function ($query) use ($kelas){
                 if(!empty($kelas)) {
-                    $query->where("namakelas", "like", "$kelas%");
+                    $query->where("namakelas", "$kelas");
                 }
             })
             ->whereHas("absen", function ($query) use ($tanggal){
@@ -70,7 +70,7 @@ class umumC extends Controller
             })
             ->whereHas("kelas", function ($query) use ($kelas){
                 if(!empty($kelas)) {
-                    $query->where("namakelas", "like", "$kelas%");
+                    $query->where("namakelas", "$kelas");
                 }
             })
             ->where("idkelas", "!=", 4)
