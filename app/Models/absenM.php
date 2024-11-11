@@ -23,7 +23,7 @@ class absenM extends Model
 
     public function siswa()
     {
-        return $this->hasOne(siswaM::class, 'idsiswa', 'idsiswa');
+        return $this->hasOne(siswaM::class, 'nis', 'nis');
     }
 
 }

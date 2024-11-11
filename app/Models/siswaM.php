@@ -22,5 +22,9 @@ class siswaM extends Model
     {
         return $this->hasOne(kelasM::class, 'idkelas', 'idkelas');
     }
+    public function absen()
+    {
+        return $this->belongsTo(absenM::class, 'nis', 'nis');
+    }
 
 }

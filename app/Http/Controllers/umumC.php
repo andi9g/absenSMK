@@ -22,20 +22,63 @@ class umumC extends Controller
         $keyword = empty($request->keyword)?"":$request->keyword;
         $jurusan = empty($request->jurusan)?"":$request->jurusan;
         $kelas = empty($request->kelas)?"":$request->kelas;
+        $kehadiran = empty($request->kehadiran)?"hadir":$request->kehadiran;
+
 
         $djurusan = jurusanM::get();
         $dkelas = kelasM::get();
 
-        $siswa = siswaM::join('kelas', 'kelas.idkelas', 'siswa.idkelas')
-        ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
-        ->where("siswa.namasiswa", 'like', "%$keyword%")
-        ->where("jurusan.idjurusan", 'like', "$jurusan%")
-        ->where("kelas.idkelas", 'like', "$kelas%")
-        ->select('siswa.*', 'kelas.namakelas','jurusan.namajurusan')
-        ->with(["jurusan", "kelas"])
-        ->paginate(15);
+        // $siswa = siswaM::join('kelas', 'kelas.idkelas', 'siswa.idkelas')
+        // ->join('jurusan', 'jurusan.idjurusan', 'siswa.idjurusan')
+        // ->where("siswa.namasiswa", 'like', "%$keyword%")
+        // ->where("jurusan.idjurusan", 'like', "$jurusan%")
+        // ->where("kelas.idkelas", 'like', "$kelas%")
+        // ->select('siswa.*', 'kelas.namakelas','jurusan.namajurusan')
+        // ->with(["jurusan", "kelas"])
+        // ->paginate(15);
 
-        $siswa->appends($request->only(['limit', 'keyword', 'tanggal', 'jurusan', 'kelas']));
+
+        $hadir = absenM::where("tanggal", date("Y-m-d"))->pluck("nis")->toArray();
+
+        // dd($hadir);
+        if($kehadiran == "hadir") {
+            $siswa = siswaM::whereIn("nis", $hadir)
+            ->where("namasiswa", "like", "%$keyword%")
+            ->whereHas("jurusan", function ($query) use ($jurusan){
+                if(!empty($jurusan)) {
+                    $query->where("namajurusan", "like", "$jurusan%");
+                }
+            })
+            ->whereHas("kelas", function ($query) use ($kelas){
+                if(!empty($kelas)) {
+                    $query->where("namakelas", "like", "$kelas%");
+                }
+            })
+            ->whereHas("absen", function ($query) use ($tanggal){
+                    $query->where("tanggal", "$tanggal");
+            })
+            ->where("idkelas", "!=", 4)
+            ->orderBy("namasiswa", "asc")
+            ->paginate(15);
+        }else {
+            $siswa = siswaM::whereNotIn("nis", $hadir)
+            ->where("namasiswa", "like", "%$keyword%")
+            ->whereHas("jurusan", function ($query) use ($jurusan){
+                if(!empty($jurusan)) {
+                    $query->where("namajurusan", "like", "$jurusan%");
+                }
+            })
+            ->whereHas("kelas", function ($query) use ($kelas){
+                if(!empty($kelas)) {
+                    $query->where("namakelas", "like", "$kelas%");
+                }
+            })
+            ->where("idkelas", "!=", 4)
+            ->orderBy("namasiswa", "asc")
+            ->paginate(15);
+        }
+
+        $siswa->appends($request->only(['limit', 'keyword', 'tanggal', 'jurusan', 'kelas', "kehadiran"]));
 
 
 
@@ -45,7 +88,7 @@ class umumC extends Controller
             'keyword' => $keyword,
             'jurusan' => $jurusan,
             'kelas' => $kelas,
-
+            "hadir" => $kehadiran,
             'datajurusan' => $djurusan,
             'datakelas' => $dkelas,
         ]);

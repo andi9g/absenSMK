@@ -14,36 +14,50 @@
 <div class="container my-3 mb-5">
     <form action="{{ url()->current() }}">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class='form-group'>
                     <input type='date' name='tanggal' onchange="submit()" id='fortanggal' class='form-control' value="{{$tanggal}}">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class='form-group'>
+                    <select name="kehadiran" class="form-control" onchange="submit()">
+                        <option value="hadir" @if ($hadir == "hadir")
+                            selected
+                        @endif>SUDAH ABSEN</option>
+                        <option value="tidak hadir" @if ($hadir == "tidak hadir")
+                            selected
+                        @endif>BELUM ABSEN</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class='form-group'>
                     <select name="jurusan" class="form-control" onchange="submit()">
                         <option value="">Seluruh Jurusan</option>
                         @foreach ($datajurusan as $j)
-                            <option value="{{$j->idjurusan}}" class="text-capitalize" @if ($j->idjurusan == $jurusan)
+                            <option value="{{$j->namajurusan}}" class="text-capitalize" @if ($j->namajurusan == $jurusan)
                                 selected
                             @endif>{{$j->namajurusan}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class='form-group'>
                         <select name="kelas" class="form-control" onchange="submit()">
                             <option value="">Seluruh Kelas</option>
                             @foreach ($datakelas as $j)
-                                <option value="{{$j->idkelas}}" class="text-capitalize" @if ($j->idkelas == $kelas)
+                                <option value="{{$j->namakelas}}" class="text-capitalize" @if ($j->namakelas == $kelas)
                                     selected
                                 @endif>{{$j->namakelas}}</option>
                             @endforeach
                         </select>
                     </div>
+
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" value="{{empty($_GET['keyword'])?'':$_GET['keyword']}}" name="keyword" placeholder="Berdasarkan Nama" aria-describedby="button-addon2">
                     <div class="input-group-append">
@@ -85,7 +99,7 @@
                                 <td nowrap width="5px">{{$loop->iteration + $siswa->firstItem() - 1 }}</td>
                                 <td>{{ucwords(strtolower($item->namasiswa))}}</td>
                                 <td nowrap class="text-center">
-                                    {{$item->namakelas."-".$item->namajurusan}}
+                                    {{$item->jurusan->namajurusan."-".$item->kelas->namakelas}}
                                 </td>
                                 <td>
                                     @php
@@ -93,15 +107,15 @@
                                         ->where('tanggal', $tanggal);
                                     @endphp
                                     @if ($cek->count() > 0)
-                                        @if ($cek->first()->ket == "H")
+                                        @if ($item->absen->ket == "H")
                                         <font class="text-success text-bold">
                                             HADIR
                                         </font>
-                                        @elseif ($cek->first()->ket == "S")
+                                        @elseif ($item->absen->ket == "S")
                                         <font class="text-warning text-bold">
                                             SAKIT
                                         </font>
-                                        @elseif ($cek->first()->ket == "I")
+                                        @elseif ($item->absen->ket == "I")
                                         <font class="text-info text-bold">
                                             IZIN
                                         </font>
