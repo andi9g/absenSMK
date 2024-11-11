@@ -57,7 +57,7 @@
                     </div>
 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" value="{{empty($_GET['keyword'])?'':$_GET['keyword']}}" name="keyword" placeholder="Berdasarkan Nama" aria-describedby="button-addon2">
                     <div class="input-group-append">
